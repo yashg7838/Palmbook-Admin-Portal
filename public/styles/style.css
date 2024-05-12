@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
+*{
+    padding: 0%;
+    margin: 0%;
+}
+.box{
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: rgb(32, 32, 32);
+    width: 70%;
+    height: 40vw;
+    margin-left: 17vw;
+    margin-top: 5vw;
+}
+.right{
+    position: relative;
+}
+.tagline{
+    position: absolute;
+    top: 8vw;
+    left: 49vw;
+}
+.tagline h1{
+    font-family: 'poppins', sans-serif !important;
+    color: white;
+    font-size: 4vw;
+}
+.left{
+    padding-top: 10vw;
+    color: white;
+    font-family: 'poppins', sans-serif !important;
+}
+
+.left h1{
+    font-size: 3vw;
+    margin-left: 5vw;
+}
+
+.left h3{
+    padding-left: 5vw;
+    text-align: left;
+    font-weight: 100;
+    font-size: 1vw;
+}
+.left p{
+    margin-left: 5vw;
+    font-size: 1vw
+}
+
+#image{
+    border-radius: 0 20px 20px 0;
+    width: 42vw;
+    height: 40vw;
+}
+.container{
+
+}
+#username{
+    border-width: 0 0 2px;
+    margin-left: 5vw;
+    font-size: 1.4vw;
+    color: white;
+    background-color: transparent;
+}
+#pass{
+    border-width: 0 0 2px;
+    background-color: transparent;
+    margin-left: 5vw;
+    font-size: 1.4vw;
+    color: white;
+}
+#forgot{
+    font-size: 1vw;
+    margin-left: 5vw;
+    color: rgb(99, 55, 218);
+    text-decoration: none;
+}
+#login{
+    margin-left: 5vw;
+    font-size: 1.5vw;
+    padding-left: 6.6vw;
+    padding-right: 6.6vw;
+    padding-top: 0.8vw;
+    padding-bottom: 0.8vw;
+    border-radius: 1vw;
+    background-color: rgb(99, 55, 218);
+    color: white;
+    font-weight: 100;
+    cursor: pointer;
+}
+#signup{
+    text-decoration: none;
+    color: rgb(99, 55, 218);
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PalmBook</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./styles/faculty.css">
+    <link rel="stylesheet" href="./styles/sidebar.css">
+    <link rel="stylesheet" href="./styles/navbar.css">
+</head>
+<body>
+    <div class="container" id="contain">
+        <%- include("sidebar.ejs")%>
+        <div class="main" id="main">
+            <%- include("navbar.ejs") %>
+            <div class="tag" id="tag">
+                <p id="head">Faculty Registration</p>
+                <button id="export" ><i class="fa-solid fa-file-export"></i> Export</button>
+                <button id="save"><i class="fa-solid fa-file-import"></i> Import</button>
+            </div>
+            <div class="content" id="cont">
+                <h2>Personal Details</h2>
+                <div style="height: 0.8vw;"></div>
+                <div class="details">
+                    <div class="data">
+                        <form action="" id="form1">
+                            <label for="name">Full Name:</label><br>
+                            <input type="text" id="name" name="name" placeholder="Enter Your Full Name" ><br>
+                            <div style="height: 2vw;"></div>
+                            <label for="email" id="mail">Email ID:</label><br>
+                            <input type="email" id="email" name="email" placeholder="Enter Your Email" >
+                        </form>
+                    </div>
+                    <div class="data1">
+                        <form action="" id="form2">
+                            <label for="phone">Phone Number:</label>
+                            <input type="tel" pattern="[0-9]{3}-[0-9]{6}" id="phone" name="phone" placeholder="Enter Your Number" ><br>
+                            <div style="height: 2vw"></div>
+                            <label for="dob">DOB:</label><br>
+                            <input type="date" id="dob" name="dob">
+                        </form>
+                    </div>
+                    <div class="data2">
+                        <form action="" id="form3">
+                            <label for="gender" id="gen">Gender:</label><br>
+                            <select id="gender" name="gender">
+                                <option value="none" >Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select><br>
+                            <div style="height: 2vw;"></div>
+                            <label for="Designation">Designation:</label>
+                            <input type="text" id="desig" name="designation" placeholder="Designation">
+                        </form>
+                    </div>
+                    <div class="data3">
+                        <form action="" id="form4">
+                            <label for="club">Club Mentor:</label><br>
+                            <select name="club" id="club">
+                                <option value="No club">None</option>
+                                <option value="PFA">PFA</option>
+                                <option value="ACM">ACM</option>
+                                <option value="ROBOTICS">ROBOTICS</option>
+                                <option value="STROKES">STROKES</option>
+                                <option value="SIERRA">SIERRA</option>
+                            </select>
+                            <div style="height: 2vw;"></div>
+                        </form>
+                    </div>
+                    <div class="data4">
+                        <form action="" id="form5">
+                            <label for="Date of joining">Date of joining:</label><br>
+                            <input type="date" id="doj" name="Date of joining">
+                        </form>
+                        <div style="height: 4vw;"></div>
+                        <button id="submitbtn">Submit</button>
+                    </div>
+                    <div class="data5">
+                        <form action="" id="form6">
+                            <label for="Department">Department:</label><br>
+                            <input type="text" id="dept" name="Department" placeholder="Department">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/d91f0db9b6.js" crossorigin="anonymous"></script>
+    <script src="./index.js"></script>
+</body>
+</html>

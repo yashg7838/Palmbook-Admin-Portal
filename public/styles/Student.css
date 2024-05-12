@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
+*{
+    padding: 0%;
+    margin: 0%;
+}
+.container{
+    display: grid;
+    width: 99.2vw;
+    grid-template-columns: 1fr 5fr;
+}
+/* .sidebar{
+    height: 55vw;
+    background-color: white;
+    border-right: 0.12vw solid rgb(206, 206, 206);
+}
+.sidebar h2{
+    margin:3vw 3vw 3vw;
+    font-size: 2vw;
+    font-weight: 100;
+    font-family: 'poppins', sans-serif !important;
+}
+.sidebar ul{
+    font-family: 'poppins', sans-serif !important;
+    font-size: 1.5vw;
+    margin-left: 1vw;
+    text-align: center;
+    list-style-type: none;
+}
+.sidebar ul li button{
+    margin-top: 2vw;
+    border: 0;
+    height: 2.2vw;
+    width: 12vw;
+    border-radius: 20px;
+    background-color: transparent;
+    font-size: 1.5vw;
+    cursor: pointer;
+} */
+
+#createStudent-btn{
+    color: white;
+    background-color: rgba(97, 67, 230, 0.767);
+}
+
+.main{
+    background-color: white;
+    display: grid;
+    width: 100%;
+    grid-template-rows: 6vw 5vw 39vw;
+}
+.tag{
+    padding-left: 2vw;
+    padding-top: 0.9vw;
+    font-size: 2vw;
+    font-weight: 100;
+    font-family: 'poppins', sans-serif !important;
+    background-color: white;
+    display: flex;
+    border-left: .12vw solid rgb(206, 206, 206);
+    border-bottom: .12vw solid rgb(206, 206, 206);
+}
+.nav{
+    background-color: white;
+    border-left: .12vw solid rgb(206, 206, 206);
+    border-bottom: .12vw solid rgb(206, 206, 206);
+}
+#cont{
+    display: block;
+}
+.content{
+    border-left: .12vw solid rgb(206, 206, 206);
+    font-size: 1vw;
+    font-weight: 100;
+    height: 44vw;
+    background-color:white;
+    font-family: 'poppins', sans-serif !important;
+}
+.content h2{
+    padding-top: 2vw;
+    padding-left: 2vw;
+}
+#export{
+    font-family: 'poppins', sans-serif !important;
+    margin-left: 46vw;
+    height: 2vw;
+    margin-top: 0.6vw;
+    color: white;
+    font-size: 1vw;
+    width: 5.5vw;
+    background-color: rgba(97, 67, 230, 0.767);
+    border-width: 0;
+    cursor: pointer;
+    border-radius: 0.4vw;
+}
+#save{
+    width: 5.5vw;
+    cursor: pointer;
+    color: white;
+    font-family: 'poppins', sans-serif !important;
+    margin-left: 1.5vw;
+    height: 2vw;
+    margin-top: 0.6vw;
+    font-size: 1vw;
+    background-color: rgba(97, 67, 230, 0.767);
+    border-width: 0;
+    border-radius: 0.4vw;
+}
+.details{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 17vw 17vw;
+}
+
+#form1, #form2, #form3{
+    margin-top: 1.2vw;
+    margin-left: 2.5vw;
+    font-family: 'poppins', sans-serif !important;
+    font-size: 2vw;
+}
+#form4, #form5, #form6{
+    margin-left: 2.5vw;
+    font-family: 'poppins', sans-serif !important;
+    font-size: 2vw;
+}
+
+#name, #email, #phone, #dob, #gender, #course, #club, #dept, #batch, #hostel, #hname, #Rnumber {
+    font-size: 1.5vw;
+    font-family: 'poppins', sans-serif !important;
+    text-align: center;
+    width: 20vw;
+}
+#submitbtn{
+    font-size: 1.5vw;
+    font-family: 'poppins', sans-serif !important;
+    text-align: center;
+    width: 10vw;
+    margin-left: 8.2vw;
+    background-color: rgba(97, 67, 230, 0.767);
+    border-width: 0;
+    color: white;
+    cursor: pointer;
+    border-radius: 0.4vw;
+}
+/* #setting{
+    cursor: pointer;
+    border-radius: 50px;
+    border: 0;
+    background-color: transparent;
+    margin-top: 2vw;
+    font-size: 40px;
+    height: 2.5vw;
+    width: 2.5vw;
+    margin-left: 75vw;
+}
+
+#setting :hover{
+    transform: rotate(90deg);
+    transition: transform 1.5s;
+} */
+/* .nav :hover .box{
+    display: block;
+} */
+
+/* .box{
+    position: absolute;
+    top: 4.5vw;
+    display: none;
+}
+.box ul{
+    text-align: center;
+    font-size: 1vw;
+    margin-left: 70vw;
+    list-style-type: none;
+}
+.box ul li button{
+    width: 12vw;
+    border: 0 1vw;
+    font-size: 1.2vw;
+    z-index: 1;
+    border-radius: 0 10px 0 10px;
+}
+.box ul li :hover{
+    background-color: rgb(149, 130, 233);
+    color: white;
+    border-color: white;
+}
+
+.set:hover .box{
+    display: block;
+    transition: all 2s;
+}
+.set{
+    width: 0.1vw;
+    height: 0.1vw;
+} */

@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
+*{
+    padding: 0%;
+    margin: 0%;
+}
+.container{
+    display: grid;
+    width: 100vw;
+    grid-template-columns: 1fr 5fr;
+
+}
+.main{
+    /* display: grid; */
+    /* grid-template-rows: 5rem 5rem 3rem  ; */
+}
+
+.side{
+    height: 50vw;
+    background-color: white;
+    border-right: 0.12vw solid rgb(206, 206, 206);
+}
+.side h2{
+    margin:3vw 3vw 3vw;
+    font-size: 2vw;
+    font-weight: 100;
+    font-family: 'poppins', sans-serif !important;
+}
+.side ul{
+    font-family: 'poppins', sans-serif !important;
+    font-size: 1.5vw;
+    margin-left: 1vw;
+    text-align: center;
+    list-style-type: none;
+}
+.side ul li button{
+    margin-top: 2vw;
+    border: 0;
+    height: 2.2vw;
+    width: 12vw;
+    border-radius: 20px;
+    background-color: transparent;
+    font-size: 1.5vw;
+    cursor: pointer;
+}
+#services{
+    color: white;
+    background-color: rgba(97, 67, 230, 0.767);
+}
+
+
+
+.main{
+    background-color: white;
+    display: grid;
+    grid-template-rows: 6vw 5vw 2.2vw 30vw;
+}
+.tag{
+    padding-left: 2vw;
+    padding-top: 0.9vw;
+    font-size: 2vw;
+    font-weight: 100;
+    font-family: 'poppins', sans-serif !important;
+    background-color: white;
+    display: flex;
+    border-left: .12vw solid rgb(206, 206, 206);
+    border-bottom: .12vw solid rgb(206, 206, 206);
+}
+.nav{
+    background-color: white;
+    border-left: .12vw solid rgb(206, 206, 206);
+    border-bottom: .12vw solid rgb(206, 206, 206);
+}
+#export{
+    font-family: 'poppins', sans-serif !important;
+    margin-left: 45vw;
+    height: 2vw;
+    margin-top: 0.6vw;
+    color: white;
+    font-size: 1vw;
+    width: 7.3vw;
+    background-color: rgba(97, 67, 230, 0.767);
+    border-width: 0;
+    padding: 0.4rem;
+    cursor: pointer;
+    border-radius: 0.4vw;
+}
+#save{
+    /* padding: 0.4rem; */
+    width: 9.4vw;
+    cursor: pointer;
+    color: white;
+    font-family: 'poppins', sans-serif !important;
+    margin-left: 1.5vw;
+    height: 2vw;
+    margin-top: 0.6vw;
+    font-size: 1vw;
+    background-color: rgba(97, 67, 230, 0.767);
+    border-width: 0;
+    border-radius: 0.4vw;
+}
+
+#setting{
+    cursor: pointer;
+    border-radius: 50px;
+    border: 0;
+    background-color: transparent;
+    margin-top: 2vw;
+    font-size: 40px;
+    height: 2.5vw;
+    width: 2.5vw;
+    margin-left: 75vw;
+}
+
+#setting :hover{
+    transform: rotate(90deg);
+    transition: transform 1.5s;
+}
+.box{
+    position: absolute;
+    top: 4.5vw;
+    display: none;
+}
+.box ul{
+    text-align: center;
+    font-size: 1vw;
+    margin-left: 70vw;
+    list-style-type: none;
+}
+.box ul li button{
+    width: 12vw;
+    border: 0 1vw;
+    font-size: 1.2vw;
+    z-index: 1;
+    border-radius: 0 10px 0 10px;
+}
+.box ul li :hover{
+    background-color: rgb(149, 130, 233);
+    color: white;
+    border-color: white;
+}
+
+.set:hover .box{
+    display: block;
+    transition: all 2s;
+}
+.set{
+    width: 0.1vw;
+    height: 0.1vw;
+}
+.nan ul{
+    border-left: 0.2vw solid rgb(206, 206, 206);
+    display: flex;
+    list-style: none;
+    font-size: 1.5vw;
+}
+.nan ul li{
+    color: rgb(112, 112, 112);
+    margin-left: 2vw;
+    cursor: pointer;
+    border-bottom: 0.2vw solid rgb(112, 112, 112);
+}
+.nan ul li:hover{
+    transform: scale(1.1);
+    color: black;
+    border-bottom: 0.2vw solid black;
+    transition: transform 1.4s;
+}
+#secondary{
+    font-family: 'poppins', sans-serif !important;
+    margin-top: 0.7vw;
+    font-size: 1vw;
+}
+#secondary li{
+    margin-top: 0.7vw;
+}
+#secondary button{
+    margin-top: 0.7vw;
+    font-size: 1.1vw;
+}
+#shuttle{
+    color: rgb(38, 38, 202);
+}
+#bullet{
+    font-size: 0.7vw;
+}
+.Shuttle{
+    background-color: white;
+    height: 36vw;
+    text-align: center;
+    border: 0.2vw solid rgb(206, 206, 206);
+}
+table{
+    font-family: 'poppins-bold', sans-serif !important;
+    text-align: center;
+    width: 60vw;
+    margin-top: 1vw;
+    border: 0.1vw solid black;
+    margin-left: 13vw;
+}
+
+th{
+    font-size: 2vw;
+    font-weight: 300;
+}
+td{
+    padding: 1.3vw;
+    font-size: 1.5vw;
+    border-top: 0.1vw solid black;
+}

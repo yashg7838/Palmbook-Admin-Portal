@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PalmBook</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="./styles/other.css"> -->
+    <link rel="stylesheet" href="./styles/sidebar.css">
+    <link rel="stylesheet" href="./styles/navbar.css">
+    <link rel="stylesheet" href="./styles/register.css">
+</head>
+<body>
+    <div class="container" id="contain">
+
+            <% if (message) { %>
+                <div class="alert alert-danger" role="alert">
+                    <%= message %>
+                </div>
+            <% } %>
+            <!-- Your registration form or content goes here -->
+        
+        <%- include("sidebar.ejs")%>
+        <div class="main" id="main">
+            <%- include("navbar.ejs") %>
+            <div class="tag" id="tag">
+                <p id="head">Admin Registration</p>
+            </div>
+            <div class="content" id="cont">
+                <h2>Credentials</h2>
+                <div style="height: 0.8vw;"></div>
+                <div class="details">
+                    <div class="data">
+                        <form action="/register" method="post" id="form2">
+                            <div style="height: 2vw;"></div>
+                            <label for="name">Username:</label><br>
+                            <input type="text" id="name" name="name" placeholder="Enter username" ><br>
+                       
+                    </div>
+                    <div class="data1">
+                        
+                            <div style="height: 2vw;"></div>
+                            <label for="email" id="mail">Email ID:</label><br>
+                            <input type="email" id="username" name="email" placeholder="Enter Your Email" >
+                       
+                    </div>
+                    <div class="data2">
+                        
+                            <div style="height: 2vw;"></div>
+                            <label for="password">Password:</label><br>
+                            <input type="password" name="password" id="password" placeholder="Password">
+                        
+                    </div>
+                    <div class="data3">
+                        
+                    </div>
+                    <div class="data4">
+                        <button id="submitbtn" type="submit">Submit</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/d91f0db9b6.js" crossorigin="anonymous"></script>
+    <script src="./index.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PalmBook</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/d91f0db9b6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./styles/services.css">
+    <link rel="stylesheet" href="./styles/sidebar_services.css">
+</head>
+<body>
+        <%-include("sidebar.ejs") %>
+        <div class="main">
+            <%- include("navbar.ejs")%>
+            <div class="tag">
+                <p id="head">Mess Menu</p>
+                <button id="export" ><i class="fa-solid fa-file-export"></i> New Entry</button>
+                <button id="save"><i class="fa-solid fa-file-import"></i> Upload CSV</button>
+            </div>
+            <div class="nan">
+                <ul>
+                    <li>This Week</li>
+                    <li>Teams</li>
+                    <li>Roles</li>
+                </ul>
+            </div>
+            <div class="mess">
+                
+            </div>
+        </div>
+    </div>
+    <script src="./public/index.js"></script>
+</body>
+</html>

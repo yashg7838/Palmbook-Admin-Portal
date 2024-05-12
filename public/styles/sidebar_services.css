@@ -1,0 +1,37 @@
+.side{
+    height: 50vw;
+    background-color: white;
+    border-right: 0.12vw solid rgb(206, 206, 206);
+}
+.side h2{
+    margin:3vw 3vw 3vw;
+    font-size: 2vw;
+    font-weight: 100;
+    font-family: 'poppins', sans-serif !important;
+}
+.side ul{
+    font-family: 'poppins', sans-serif !important;
+    font-size: 1.5vw;
+    margin-left: 1vw;
+    text-align: center;
+    list-style-type: none;
+}
+.side ul li button{
+    margin-top: 2vw;
+    border: 0;
+    height: 2.2vw;
+    width: 12vw;
+    border-radius: 20px;
+    background-color: transparent;
+    font-size: 1.5vw;
+    cursor: pointer;
+}
+
+/* #createStudent-btn{
+    color: white;
+    background-color: rgba(97, 67, 230, 0.767);
+} */
+
+#bullet{
+    font-size: 1vw;
+}

@@ -1,0 +1,48 @@
+#setting{
+    cursor: pointer;
+    border-radius: 50px;
+    border: 0;
+    background-color: transparent;
+    margin-top: 2vw;
+    font-size: 2vw;
+    height: 2.5vw;
+    width: 2.5vw;
+    margin-left: 75vw;
+}
+#setting :hover{
+    transform: rotate(90deg);
+    transition: transform 1.5s;
+}
+
+.box{
+    position: absolute;
+    top: 4.5vw;
+    display: none;
+}
+.box ul{
+    text-align: center;
+    font-size: 1vw;
+    margin-left: 70vw;
+    list-style-type: none;
+}
+.box ul li button{
+    width: 12vw;
+    border: 0 1vw;
+    font-size: 1.2vw;
+    z-index: 1;
+    border-radius: 0 10px 0 10px;
+}
+.box ul li :hover{
+    background-color: rgb(149, 130, 233);
+    color: white;
+    border-color: white;
+}
+
+.set:hover .box{
+    display: block;
+    transition: all 2s;
+}
+.set{
+    width: 0.1vw;
+    height: 0.1vw;
+}
