@@ -18,54 +18,20 @@
             <div class="tag">
                 <p id="head">Student Registration</p>
                 <button id="export" ><i class="fa-solid fa-file-export"></i> Export</button>
-                <button id="save"><i class="fa-solid fa-file-import"></i> Import</button>
+                <button id="import"><i class="fa-solid fa-file-import"></i> Import</button>
+                <input type="file" id="fileInput" accept=".csv" style="display: none;">
             </div>
             <div class="content" id="cont">
                 <h2>Personal Details</h2>
                 <div style="height: 0.8vw;"></div>
                 <div class="details">
-                    <div class="data">
-                        <form action="" id="form1">
-                            <label for="name">Full Name:</label><br>
-                            <input type="text" id="name" name="name" placeholder="Enter Your Full Name" required ><br>
-                            <div style="height: 2vw;"></div>
-                            <label for="email" id="mail">Email ID:</label><br>
+                    <form action="">
+                        <div class="data">
+                            <label for="name">Full Name:</label>
+                            <input type="text" id="name" name="name" placeholder="Enter Your Full Name" required >
+                            <label for="email" id="mail">Email ID:</label>
                             <input type="email" id="email" name="email" placeholder="Enter Your Email" required>
-                        </form>
-                    </div>
-                    <div class="data1">
-                        <form action="" id="form2">
-                            <label for="phone">Phone Number:</label>
-                            <input type="tel" pattern="[0-9]{3}-[0-9]{6}" id="phone" name="phone" required placeholder="Enter Your Number" ><br>
-                            <div style="height: 2vw"></div>
-                            <label for="dob">DOB:</label><br>
-                            <input type="date" id="dob" name="dob" required>
-                        </form>
-                    </div>
-                    <div class="data2">
-                        <form action="" id="form3">
-                            <label for="gender" id="gen">Gender:</label><br>
-                            <select id="gender" name="gender" required>
-                                <option value="none" >Select</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
-                            </select><br>
-                            <div style="height: 2vw;"></div>
-                            <label for="Designation">Course:</label>
-                            <select name="course" id="course" required>
-                                <option value="none">None</option>
-                                <option value="Btech">B.Tech</option>
-                                <option value="BBA">BBA</option>
-                                <option value="BCOM">B.com</option>
-                                <option value="LLB">LLB</option>
-                            </select>
-                            <!-- <input type="text" id="desig" name="designation" placeholder="Course"> -->
-                        </form>
-                    </div>
-                    <div class="data3">
-                        <form action="" id="form4">
-                            <label for="club">Major Club:</label><br>
+                            <label for="club">Major Club:</label>
                             <select name="club" required id="club">
                                 <option value="No club">None</option>
                                 <option value="PFA">PFA</option>
@@ -74,21 +40,43 @@
                                 <option value="STROKES">STROKES</option>
                                 <option value="SIERRA">SIERRA</option>
                             </select>
-                            <div style="height: 2vw;"></div>
-                            <label for="Hostel">Hostel:</label><br>
+                            <label for="Batch">Batch:</label>
+                            <input type="number" name="Batch" id="batch" placeholder="Batch Year" maxlength="4" required min="2014">
+                        </div>
+                        <div class="data">
+                            <label for="phone">Phone Number:</label>
+                            <input type="tel" pattern="[0-9]{3}-[0-9]{6}" id="phone" name="phone" required placeholder="Enter Your Number" >
+                            <!-- <div style="height: 2vw"></div> -->
+                            <label for="dob">DOB:</label>
+                            <input type="date" id="dob" name="dob" required>
+                            <label for="Hostel">Hostel:</label>
                             <select name="Hostel" id="hostel">
                                 <option value="select">Select</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
-                        </form>
-                    </div>
-                    <div class="data4">
-                        <form action="" id="form5">
-                            <label for="Batch">Batch:</label><br>
-                            <input type="number" name="Batch" id="batch" placeholder="Batch Year" maxlength="4" required min="2014">
-                            <div style="height: 2vw;"></div>
-                            <label for="hname">Hostel Name:</label><br>
+                            <label for="Department">Specialization:</label>
+                            <input type="text" id="dept" name="Department" placeholder="Specialization">
+                            <button id="submitbtn">Submit</button>
+                        </div>
+                        <div class="data">
+                            <label for="gender" id="gen">Gender:</label>
+                            <select id="gender" name="gender" required>
+                                <option value="none" >Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <!-- <div style="height: 2vw;"></div> -->
+                            <label for="Designation">Course:</label>
+                            <select name="course" id="course" required>
+                                <option value="none">None</option>
+                                <option value="Btech">B.Tech</option>
+                                <option value="BBA">BBA</option>
+                                <option value="BCOM">B.com</option>
+                                <option value="LLB">LLB</option>
+                            </select>
+                            <label for="hname">Hostel Name:</label>
                             <select name="hname" id="hname">
                                 <option value="none">Select</option>
                                 <option value="Bhagat Singh">Bhagat Singh Hostel</option>
@@ -98,23 +86,34 @@
                                 <option value="Vikram Sarabai">Vikram Sarabai</option>
                                 <option value="APJ Abdul Kalam">APJ Abdul Kalam</option>
                             </select>
-                        </form><br><br>
-                        <button id="submitbtn">Submit</button><br><br>
-                    </div>
-                    <div class="data5">
-                        <form action="" id="form6">
-                            <label for="Department">Specialization:</label><br>
-                            <input type="text" id="dept" name="Department" placeholder="Specialization">
-                            <div style="height: 2vw;"></div>
                             <label for="Rnumber">Registration Number:</label>
                             <input type="number" name="Rnumber" id="Rnumber" placeholder="Registration Number" required min="140000" >
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
     <script src="https://kit.fontawesome.com/d91f0db9b6.js" crossorigin="anonymous"></script>
-    <script src="./script.js"></script>
+    <script src="./index.js"></script>
+    <script>
+        document.getElementById('import').addEventListener('click', function() {
+            document.getElementById('fileInput').click();
+        });
+
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const csvContent = e.target.result;
+                    // Here you can process the CSV content
+                    console.log(csvContent); // For demonstration, log the CSV content
+                    // You can parse the CSV content and populate the form or send it to the server
+                };
+                reader.readAsText(file);
+            }
+        });
+    </script>
 </body>
 </html>

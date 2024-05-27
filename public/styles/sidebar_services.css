@@ -12,8 +12,8 @@
 .side ul{
     font-family: 'poppins', sans-serif !important;
     font-size: 1.5vw;
-    margin-left: 1vw;
-    text-align: center;
+    /* margin-left: 1vw; */
+    /* text-align: center; */
     list-style-type: none;
 }
 .side ul li button{
@@ -26,12 +26,6 @@
     font-size: 1.5vw;
     cursor: pointer;
 }
-
-/* #createStudent-btn{
-    color: white;
-    background-color: rgba(97, 67, 230, 0.767);
-} */
-
 #bullet{
     font-size: 1vw;
 }

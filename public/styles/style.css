@@ -2,6 +2,7 @@
 *{
     padding: 0%;
     margin: 0%;
+    outline-width: 0;
 }
 .box{
     border-radius: 20px;
@@ -72,6 +73,8 @@
 }
 #forgot{
     font-size: 1vw;
+    border: 0;
+    background-color: transparent;
     margin-left: 5vw;
     color: rgb(99, 55, 218);
     text-decoration: none;
@@ -92,4 +95,33 @@
 #signup{
     text-decoration: none;
     color: rgb(99, 55, 218);
+}
+h2{
+    margin-left: 5vw;
+}
+h3{
+    margin-top: 0.5vw;
+}
+#requestbtn{
+    margin-left: 8vw;
+    margin-top: 1vw;
+    font-size: 1.5vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 0.3vw;
+    padding-bottom: 0.3vw;
+    border-radius: 1vw;
+    background-color: rgb(99, 55, 218);
+    color: white;
+    font-weight: 100;
+    cursor: pointer;
+}
+#back_login{
+    font-size: 1vw;
+    border: 0;
+    margin-bottom: 1vw;
+    background-color: transparent;
+    margin: 0vw 0vw 1vw 15vw;
+    color: rgb(99, 55, 218);
+    text-decoration: none;
 }

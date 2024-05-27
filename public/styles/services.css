@@ -2,6 +2,7 @@
 *{
     padding: 0%;
     margin: 0%;
+    outline-width: 0;
 }
 .container{
     display: grid;
@@ -167,9 +168,11 @@
     font-family: 'poppins', sans-serif !important;
     margin-top: 0.7vw;
     font-size: 1vw;
+    text-align: left;
 }
 #secondary li{
     margin-top: 0.7vw;
+    text-align: left;
 }
 #secondary button{
     margin-top: 0.7vw;
@@ -177,11 +180,14 @@
 }
 #menu{
     color: rgb(38, 38, 202);
+    margin: 0%;
 }
 #bullet{
     font-size: 0.7vw;
+    margin: 0%;
 }
 .mess{
+    
     /* width: auto; */
     background-color: white;
     height: 36vw;
