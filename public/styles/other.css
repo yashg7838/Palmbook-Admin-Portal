@@ -2,6 +2,7 @@
 *{
     padding: 0%;
     margin: 0%;
+    outline-width: 0;
 }
 .container{
     display: grid;
@@ -9,34 +10,6 @@
     grid-template-columns: 1fr 5fr;
 
 }
-/* .sidebar{
-    height: 50vw;
-    background-color: white;
-    border-right: 0.12vw solid rgb(206, 206, 206);
-}
-.sidebar h2{
-    margin:3vw 3vw 3vw;
-    font-size: 2vw;
-    font-weight: 100;
-    font-family: 'poppins', sans-serif !important;
-}
-.sidebar ul{
-    font-family: 'poppins', sans-serif !important;
-    font-size: 1.5vw;
-    margin-left: 1vw;
-    text-align: center;
-    list-style-type: none;
-}
-.sidebar ul li button{
-    margin-top: 2vw;
-    border: 0;
-    height: 2.2vw;
-    width: 12vw;
-    border-radius: 20px;
-    background-color: transparent;
-    font-size: 1.5vw;
-    cursor: pointer;
-} */
 
 #faculty{
     color: black;
@@ -121,7 +94,7 @@
     font-size: 2vw;
 }
 #form4, #form5, #form6{
-    margin-left: 2.5vw;
+    /* margin-left: 2.5vw; */
     font-family: 'poppins', sans-serif !important;
     font-size: 2vw;
 }
@@ -130,6 +103,8 @@
 #name, #email, #phone, #dob, #gender, #desig, #club, #dept,#user , #doj {
     font-size: 1.5vw;
     font-family: 'poppins', sans-serif !important;
+    border: 0.1vw solid black;
+    border-radius: 0.5vw;
     text-align: center;
     width: 20vw;
 }
