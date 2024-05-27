@@ -17,46 +17,20 @@
             <div class="tag" id="tag">
                 <p id="head">Faculty Registration</p>
                 <button id="export" ><i class="fa-solid fa-file-export"></i> Export</button>
-                <button id="save"><i class="fa-solid fa-file-import"></i> Import</button>
+                <button id="import"><i class="fa-solid fa-file-import"></i> Import</button>
+                <input type="file" id="fileInput" accept=".csv" style="display: none;">
             </div>
             <div class="content" id="cont">
                 <h2>Personal Details</h2>
                 <div style="height: 0.8vw;"></div>
                 <div class="details">
-                    <div class="data">
-                        <form action="" id="form1">
-                            <label for="name">Full Name:</label><br>
-                            <input type="text" id="name" name="name" placeholder="Enter Your Full Name" ><br>
-                            <div style="height: 2vw;"></div>
-                            <label for="email" id="mail">Email ID:</label><br>
+                    <form action="">
+                        <div class="data">
+                            <label for="name">Full Name:</label>
+                            <input type="text" id="name" name="name" placeholder="Enter Your Full Name" >
+                            <label for="email" id="mail">Email ID:</label>
                             <input type="email" id="email" name="email" placeholder="Enter Your Email" >
-                        </form>
-                    </div>
-                    <div class="data1">
-                        <form action="" id="form2">
-                            <label for="phone">Phone Number:</label>
-                            <input type="tel" pattern="[0-9]{3}-[0-9]{6}" id="phone" name="phone" placeholder="Enter Your Number" ><br>
-                            <div style="height: 2vw"></div>
-                            <label for="dob">DOB:</label><br>
-                            <input type="date" id="dob" name="dob">
-                        </form>
-                    </div>
-                    <div class="data2">
-                        <form action="" id="form3">
-                            <label for="gender" id="gen">Gender:</label><br>
-                            <select id="gender" name="gender">
-                                <option value="none" >Select</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select><br>
-                            <div style="height: 2vw;"></div>
-                            <label for="Designation">Designation:</label>
-                            <input type="text" id="desig" name="designation" placeholder="Designation">
-                        </form>
-                    </div>
-                    <div class="data3">
-                        <form action="" id="form4">
-                            <label for="club">Club Mentor:</label><br>
+                            <label for="club">Club Mentor:</label>
                             <select name="club" id="club">
                                 <option value="No club">None</option>
                                 <option value="PFA">PFA</option>
@@ -65,28 +39,53 @@
                                 <option value="STROKES">STROKES</option>
                                 <option value="SIERRA">SIERRA</option>
                             </select>
-                            <div style="height: 2vw;"></div>
-                        </form>
-                    </div>
-                    <div class="data4">
-                        <form action="" id="form5">
-                            <label for="Date of joining">Date of joining:</label><br>
+                        </div>
+                        <div class="data">
+                            <label for="phone">Phone Number:</label>
+                            <input type="tel" pattern="[0-9]{3}-[0-9]{6}" id="phone" name="phone" placeholder="Enter Your Number" >
+                            <label for="dob">DOB:</label>
+                            <input type="date" id="dob" name="dob">
+                            <label for="Date of joining">Date of joining:</label>
                             <input type="date" id="doj" name="Date of joining">
-                        </form>
-                        <div style="height: 4vw;"></div>
-                        <button id="submitbtn">Submit</button>
-                    </div>
-                    <div class="data5">
-                        <form action="" id="form6">
-                            <label for="Department">Department:</label><br>
+                            <button id="submitbtn">Submit</button>
+                        </div>
+                        <div class="data">
+                            <label for="gender" id="gen">Gender:</label>
+                            <select id="gender" name="gender">
+                                <option value="none" >Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <label for="Designation">Designation:</label>
+                            <input type="text" id="desig" name="designation" placeholder="Designation">
+                            <label for="Department">Department:</label>
                             <input type="text" id="dept" name="Department" placeholder="Department">
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
     <script src="https://kit.fontawesome.com/d91f0db9b6.js" crossorigin="anonymous"></script>
-    <script src="./script.js"></script>
+    <script src="./index.js"></script>
+    <script>
+        document.getElementById('import').addEventListener('click', function() {
+            document.getElementById('fileInput').click();
+        });
+
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const csvContent = e.target.result;
+                    // Here you can process the CSV content
+                    console.log(csvContent); // For demonstration, log the CSV content
+                    // You can parse the CSV content and populate the form or send it to the server
+                };
+                reader.readAsText(file);
+            }
+        });
+    </script>
 </body>
 </html>
