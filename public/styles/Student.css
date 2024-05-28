@@ -13,6 +13,9 @@
     color: white;
     background-color: rgba(97, 67, 230, 0.767);
 }
+input:focus {
+    outline: none;
+}
 
 .main{
     background-color: white;
