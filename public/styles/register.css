@@ -10,6 +10,9 @@
     grid-template-columns: 1fr 5fr;
 
 }
+input:focus {
+    outline: none;
+}
 
 #admin{
     color: white;
