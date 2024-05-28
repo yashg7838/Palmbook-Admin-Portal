@@ -10,7 +10,9 @@
     grid-template-columns: 1fr 5fr;
 
 }
-
+input:focus {
+    outline: none;
+}
 #faculty{
     color: black;
     background-color: white;
