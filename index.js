@@ -40,11 +40,11 @@ function checkAuthentication(req, res, next) {
     }
 }
 
-export async function addUser(db, data) {
+export async function addUser(db,collection, data) {
     try {
+        await setDoc(doc(db, collection, data.email), data)
+    
 
-        // const docRef = await addDoc(collection(db, "users"), data);
-        await setDoc(doc(db, "users", data.email), data)
     } catch (e) {
         console.error("Error adding user: ", e);
         return null;
@@ -89,7 +89,8 @@ app.get(
 
 app.get(
     "/home", checkAuthentication, (req, res) => {
-        res.render("student.ejs")
+
+        res.redirect("/student");
     }
 );
 app.get(
@@ -100,13 +101,16 @@ app.get(
 );
 app.get(
     "/faculty", checkAuthentication, (req, res) => {
-        res.render("faculty.ejs");
+        const message = req.query.message || ""
+        res.render("faculty.ejs",{message});
 
     }
 );
 app.get(
     "/student", checkAuthentication, (req, res) => {
-        return res.render("student.ejs");
+
+        const message = req.query.message || ""
+        return res.render("student.ejs",{message});
 
     });
 app.get(
@@ -134,9 +138,19 @@ app.get(
     }
 );
 app.post("/others", async (req, res) => {
-    await addUser(db, req.body)
+    await addUser(db,"users", req.body)
 
     res.redirect("/other")
+})
+app.post("/faculty", async (req, res) => {
+    await addUser(db,"faculty", req.body)
+
+    res.redirect("/faculty?message=Faculty Added");
+})
+app.post("/student", async (req, res) => {
+    await addUser(db,"student", req.body)
+
+    res.redirect("/student?message=Faculty Added");
 })
 app.get(
     "/logout", (req, res) => {

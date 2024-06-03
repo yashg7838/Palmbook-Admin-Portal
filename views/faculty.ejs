@@ -11,6 +11,12 @@
 </head>
 <body>
     <div class="container" id="contain">
+        <% if (message) { %>
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" onclick="this.parentElement.style.display='none';">&times;</button>
+                <%= message %>
+            </div>
+        <% } %>
         <%- include("sidebar.ejs")%>
         <div class="main" id="main">
             <%- include("navbar.ejs") %>
@@ -24,7 +30,7 @@
                 <h2>Personal Details</h2>
                 <div style="height: 0.8vw;"></div>
                 <div class="details">
-                    <form action="">
+                    <form action="/faculty" method="post">
                         <div class="data">
                             <label for="name">Full Name:</label>
                             <input type="text" id="name" name="name" placeholder="Enter Your Full Name" >
@@ -42,7 +48,7 @@
                         </div>
                         <div class="data">
                             <label for="phone">Phone Number:</label>
-                            <input type="tel" pattern="[0-9]{3}-[0-9]{6}" id="phone" name="phone" placeholder="Enter Your Number" >
+                            <input type="tel" id="phone" name="phone" placeholder="Enter Your Number" >
                             <label for="dob">DOB:</label>
                             <input type="date" id="dob" name="dob">
                             <label for="Date of joining">Date of joining:</label>
