@@ -1,9 +1,6 @@
 "use strict"
 // Required Node Modules
 import express from "express";
-import pg from "pg";
-import bcrypt from "bcrypt";
-import passport from "passport";
 import session from "express-session";
 
 // Import the functions you need from the SDKs you need
