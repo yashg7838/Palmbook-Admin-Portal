@@ -5,7 +5,7 @@ import session from "express-session";
 
 // Import the functions you need from the SDKs you need
 import * as firebase from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword,sendPasswordResetEmail, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { getFirestore, getDoc, doc, setDoc } from "firebase/firestore";
 
 
@@ -81,8 +81,8 @@ app.use(
 // gateways
 app.get(
     "/", (req, res) => {
-
-        return res.render("index.ejs");
+        const message = req.query.message || ""
+        return res.render("index.ejs",{message});
     }
 );
 
@@ -172,13 +172,35 @@ app.post("/register", async (req, res) => {
 
 app.post(
     "/", (req, res) => {
+
         signInWithEmailAndPassword(auth, req.body.username, req.body.password).then(
             user => {
                 res.redirect("/home")
             }
         )
+        .catch(
+            err=>{
+                res.redirect("/?message=Incorrect email or password");
+            }
+        )
     }
 )
+app.post(
+    "/reset-password", (req,res)=>{
+
+        const email =req.body.email;
+        sendPasswordResetEmail(auth, email)
+        .then(() => {
+            res.redirect("/?message=Password Reset Link Sent");
+        })
+        .catch((error) => {
+            if(error.code=="auth/missing-email"){
+                res.redirect("/?message=Email Don't Exist in Database");    
+            }
+            res.redirect("/?message=Error sending password reset email");
+        });
+    }
+);
 
 app.get('*', function (req, res) {
     res.redirect('/home');

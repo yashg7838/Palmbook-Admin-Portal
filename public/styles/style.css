@@ -60,6 +60,13 @@ input:focus {
 .container{
 
 }
+#email{
+    border-width: 0 0 2px;
+    margin-left: 5vw;
+    font-size: 1.4vw;
+    color: white;
+    background-color: transparent;
+}
 #username{
     border-width: 0 0 2px;
     margin-left: 5vw;
@@ -127,4 +134,26 @@ h3{
     margin: 0vw 0vw 1vw 15vw;
     color: rgb(99, 55, 218);
     text-decoration: none;
+}
+.alert{
+    background-color: rgba(97, 67, 230);
+    text-align: center;
+    padding-top: 0.4vw;
+    font-size: 2vw;
+    width: 100%;
+    height: 3vw;
+    z-index: 1;
+    color: white;
+    position: fixed;
+    margin-top: -5vw;
+}
+.close {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    color: inherit;
+    background: none;
+    border: none;
+    font-size: 3rem;
+    cursor: pointer;
 }
