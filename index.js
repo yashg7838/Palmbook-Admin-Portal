@@ -2,6 +2,7 @@
 // Required Node Modules
 import express from "express";
 import session from "express-session";
+import "dotenv/config";
 
 // Import the functions you need from the SDKs you need
 import * as firebase from "firebase/app";
@@ -12,13 +13,13 @@ import { getFirestore, getDoc, doc, setDoc } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCK-HqFytwwiW87ey9TOJXVRXpvjpQq20E",
-    authDomain: "palmbook-admin.firebaseapp.com",
-    databaseURL: "https://palmbook-admin-default-rtdb.firebaseio.com",
-    projectId: "palmbook-admin",
-    storageBucket: "palmbook-admin.appspot.com",
-    messagingSenderId: "495472528955",
-    appId: "1:495472528955:web:8e9a89dd915fe31de7961e"
+    apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    databaseURL: process.env.databaseURL,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.appId
 };
 
 // Initialize Firebase
@@ -55,7 +56,7 @@ export async function addUser(db, data) {
 
 // Define const
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 // Connect to pg client
 
