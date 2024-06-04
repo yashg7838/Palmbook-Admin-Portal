@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PalmBook</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="./styles/home.css">
+    <link rel="stylesheet" href="./styles/sidebar.css">
+    <link rel="stylesheet" href="./styles/navbar.css">
+</head>
+<body>
+    <div class="container">
+        <%- include("sidebar.ejs")%>
+        <div class="main">
+            <%- include("navbar.ejs") %>
+            <div class="tag">
+                <p id="head">Home</p>
+                <!-- <button id="export" ><i class="fa-solid fa-file-export"></i> Export</button> -->
+                <!-- <button id="import"><i class="fa-solid fa-file-import"></i> Import</button> -->
+                <!-- <input type="file" id="fileInput" accept=".csv" style="display: none;"> -->
+            </div>
+            <div class="content" id="cont">
+                <!-- <h2>Personal Details</h2> -->
+                <div style="height: 0.8vw;"></div>
+                <div class="details">
+                    <!-- <form action="/student" method="post"> -->
+                        <div class="data">
+                            
+                        </div>
+                        <div class="data">
+                            
+                        </div>
+                        <div class="data">
+                            
+                        </div>
+                    <!-- </form> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/d91f0db9b6.js" crossorigin="anonymous"></script>
+    <script src="./script.js"></script>
+    <!-- <script>
+        document.getElementById('import').addEventListener('click', function() {
+            document.getElementById('fileInput').click();
+        });
+
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const csvContent = e.target.result;
+                    // Here you can process the CSV content
+                    console.log(csvContent); // For demonstration, log the CSV content
+                    // You can parse the CSV content and populate the form or send it to the server
+                };
+                reader.readAsText(file);
+            }
+        });
+    </script> -->
+</body>
+</html>

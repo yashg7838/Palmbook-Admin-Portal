@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PalmBook</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./styles/changepswd.css">
+    <link rel="stylesheet" href="./styles/sidebar.css">
+    <link rel="stylesheet" href="./styles/navbar.css">
+</head>
+<body>
+    <div class="container" id="contain">
+        <%- include("sidebar.ejs")%>
+        <div class="main" id="main">
+            <%- include("navbar.ejs") %>
+            <div class="tag" id="tag">
+                <p id="head">Change Password</p>
+            </div>
+            <div class="content" id="cont">
+                <div style="height: 2vw;"></div>
+                <div class="details">
+                    <form onsubmit="return validatePassword()" action="/changepswd" method="post">
+                        <div class="data">
+                            <label for="Currpass">Current Password:</label>
+                            <input type="Password" id="Currpass" name="Currpass" placeholder="Enter Your Old Password" required>
+                            <label for="Newpass">New Password:</label>
+                            <input type="Password" id="Newpass" name="Newpass" placeholder="Enter Your New Password" required>
+                            <input type="Password" name="ReNewPass" id="ReNewPass" placeholder="Re Enter your New Password" required>
+                            <button id="submitbtn" value="Submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/d91f0db9b6.js" crossorigin="anonymous"></script>
+    <script src="./script.js"></script>
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("Newpass").value;
+            var confirmPassword = document.getElementById("ReNewPass").value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please re-enter.");
+                return false;
+            }
+            var complexityRegex = /^(?=.*[!@#$%^&*])(?=.*[0-9])/;
+            if (!complexityRegex.test(password)) {
+                alert("Password must include at least one special character and one number.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
