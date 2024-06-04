@@ -89,8 +89,7 @@ app.get(
 
 app.get(
     "/home", checkAuthentication, (req, res) => {
-
-        res.redirect("/student");
+        res.render("home.ejs");
     }
 );
 app.get(
@@ -137,6 +136,13 @@ app.get(
         res.render("forgot.ejs")
     }
 );
+app.get(
+    "/changepswd", (req, res) => {
+        res.render("changepswd.ejs")
+    }
+)
+
+
 app.post("/others", async (req, res) => {
     await addUser(db,"users", req.body)
 
