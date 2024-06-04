@@ -6,7 +6,7 @@ import "dotenv/config";
 
 // Import the functions you need from the SDKs you need
 import * as firebase from "firebase/app";
-import { getAuth, signInWithEmailAndPassword,sendPasswordResetEmail, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword,sendPasswordResetEmail,EmailAuthProvider,reauthenticateWithCredential, updatePassword,createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { getFirestore, getDoc, doc, setDoc } from "firebase/firestore";
 
 
@@ -89,7 +89,8 @@ app.get(
 
 app.get(
     "/home", checkAuthentication, (req, res) => {
-        res.render("home.ejs");
+        const message = req.query.message || ""
+        res.render("home.ejs",{message});
     }
 );
 app.get(
@@ -141,22 +142,22 @@ app.get(
         res.render("changepswd.ejs")
     }
 )
+app.post("/student", async (req, res) => {
+    await addUser(db,"student", req.body)
 
-
-app.post("/others", async (req, res) => {
-    await addUser(db,"users", req.body)
-
-    res.redirect("/other")
+    res.redirect("/student?message=Faculty Added");
 })
 app.post("/faculty", async (req, res) => {
     await addUser(db,"faculty", req.body)
 
     res.redirect("/faculty?message=Faculty Added");
 })
-app.post("/student", async (req, res) => {
-    await addUser(db,"student", req.body)
 
-    res.redirect("/student?message=Faculty Added");
+
+app.post("/others", async (req, res) => {
+    await addUser(db,"users", req.body)
+
+    res.redirect("/other")
 })
 app.get(
     "/logout", (req, res) => {
@@ -167,6 +168,22 @@ app.get(
         }).catch((error) => {
             // An error happened.
         });
+    }
+)
+
+app.post(
+    "/", (req, res) => {
+        
+        signInWithEmailAndPassword(auth, req.body.username, req.body.password).then(
+            user => {
+                res.redirect("/home")
+            }
+        )
+        .catch(
+            err=>{
+                res.redirect("/?message=Incorrect email or password");
+            }
+        )
     }
 )
 app.post("/register", async (req, res) => {
@@ -192,20 +209,35 @@ app.post("/register", async (req, res) => {
 });
 
 app.post(
-    "/", (req, res) => {
+    "/changepswd",(req,res)=>{
+        const user=auth.currentUser;
 
-        signInWithEmailAndPassword(auth, req.body.username, req.body.password).then(
-            user => {
-                res.redirect("/home")
-            }
+        const CurrentPassword=req.body.CurrentPassword;
+        const NewPassword=req.body.NewPassword;
+        if(user!==null){
+            const email=user.email;
+            const credential =EmailAuthProvider.credential(email,CurrentPassword);
+            reauthenticateWithCredential(user, credential).then(()=>{
+            updatePassword(user,NewPassword).then(()=>{
+                res.redirect("/home?message=Password changed");
+                }).catch((err)=>{
+                    console.log(err);
+                    res.redirect("/home?message=Error in resetting the password");
+                }
+                )
+        }
         )
         .catch(
             err=>{
-                res.redirect("/?message=Incorrect email or password");
+                console.log(err);
+                res.redirect("/?message=Incorrect password");
             }
         )
     }
-)
+    }
+);
+
+
 app.post(
     "/reset-password", (req,res)=>{
 

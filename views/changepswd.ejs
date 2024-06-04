@@ -20,13 +20,13 @@
             <div class="content" id="cont">
                 <div style="height: 2vw;"></div>
                 <div class="details">
-                    <form onsubmit="return validatePassword()" action="/changepswd" method="post">
+                    <form action="/changepswd" method="post">
                         <div class="data">
                             <label for="Currpass">Current Password:</label>
-                            <input type="Password" id="Currpass" name="Currpass" placeholder="Enter Your Old Password" required>
+                            <input type="Password" id="Currpass" name="CurrentPassword" placeholder="Enter Your Old Password" required>
                             <label for="Newpass">New Password:</label>
-                            <input type="Password" id="Newpass" name="Newpass" placeholder="Enter Your New Password" required>
-                            <input type="Password" name="ReNewPass" id="ReNewPass" placeholder="Re Enter your New Password" required>
+                            <input type="Password" id="Newpass" name="NewPassword" placeholder="Enter Your New Password" required>
+                            <input type="Password" name="ReNewPassword" id="ReNewPass" placeholder="Re Enter your New Password" required>
                             <button id="submitbtn" value="Submit">Submit</button>
                         </div>
                     </form>

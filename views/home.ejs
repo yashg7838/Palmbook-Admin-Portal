@@ -12,6 +12,12 @@
 </head>
 <body>
     <div class="container">
+        <% if (message) { %>
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" onclick="this.parentElement.style.display='none';">&times;</button>
+                <%= message %>
+            </div>
+        <% } %>
         <%- include("sidebar.ejs")%>
         <div class="main">
             <%- include("navbar.ejs") %>
