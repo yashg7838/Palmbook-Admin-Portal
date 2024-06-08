@@ -48,6 +48,12 @@
                             </select>
                             <label for="Batch">Batch:</label>
                             <input type="number" name="Batch" id="batch" placeholder="Batch Year" maxlength="4" required min="2014">
+                            <label for="Scec">SCEC Member:</label>
+                            <select name="Scec" id="Scec">
+                                <option value="Select">Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
                         </div>
                         <div class="data">
                             <label for="phone">Phone Number:</label>
@@ -55,6 +61,14 @@
                             <!-- <div style="height: 2vw"></div> -->
                             <label for="dob">DOB:</label>
                             <input type="date" id="dob" name="dob" required>
+                            <label for="Club_post">Club Post:</label>
+                            <select name="Club_post" id="Club_post">
+                                <option value="Select">Select</option>
+                                <option value="Member">Member</option>
+                                <option value="EC">EC</option>
+                                <option value="VicePresident">VicePresident</option>
+                                <option value="President">President</option>
+                            </select>
                             <label for="Hostel">Hostel:</label>
                             <select name="Hostel" id="hostel">
                                 <option value="select">Select</option>
@@ -82,6 +96,8 @@
                                 <option value="BCOM">B.com</option>
                                 <option value="LLB">LLB</option>
                             </select>
+                            <label for="Rnumber">Registration Number:</label>
+                            <input type="number" name="Rnumber" id="Rnumber" placeholder="Registration Number" required min="140000" >
                             <label for="hname">Hostel Name:</label>
                             <select name="hname" id="hname">
                                 <option value="none">Select</option>
@@ -92,8 +108,8 @@
                                 <option value="Vikram Sarabai">Vikram Sarabai</option>
                                 <option value="APJ Abdul Kalam">APJ Abdul Kalam</option>
                             </select>
-                            <label for="Rnumber">Registration Number:</label>
-                            <input type="number" name="Rnumber" id="Rnumber" placeholder="Registration Number" required min="140000" >
+                            <label for="profilepic">Profile Picture:</label>
+                            <input type="file" id="ppic" accept=".jpg, .jpeg, .png">
                         </div>
                     </form>
                 </div>
