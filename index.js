@@ -152,7 +152,11 @@ app.get(
     }
 )
 app.post("/student", checkAuthentication, async (req, res) => {
-    await addUser(db, req.body)
+
+    req.body.SCEC="no";
+    req.body.Campus="In";
+    req.body.post="member";
+    await addUser(db, req.body) 
 
     res.redirect("/student?message=Student Added");
 })
@@ -207,6 +211,9 @@ app.post(
         .on("end",async()=>{
             for(const row of results){
                 try{
+                    row.SCEC="no";
+                    row.Campus="In";
+                    row.post="member";
                     await addUser(db,row);
                     
                 }
