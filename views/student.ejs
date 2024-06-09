@@ -24,10 +24,8 @@
             <div class="tag">
                 <p id="head">Student Registration</p>
                 <button id="export" ><i class="fa-solid fa-file-export"></i> Export</button>
-                <form method="post" action="/uploadcsv" id="exportForm" enctype="multipart/form-data">
-                    <input type="file" id="fileInput" name="file" style="display:none;">
-                </form>
                 <button id="import"><i class="fa-solid fa-file-import"></i> Import</button>
+                <input type="file" id="fileInput" accept=".csv" style="display: none;">
             </div>
             <div class="content" id="cont">
                 <h2>Personal Details</h2>
@@ -50,35 +48,47 @@
                             </select>
                             <label for="Batch">Batch:</label>
                             <input type="number" name="Batch" id="batch" placeholder="Batch Year" maxlength="4" required min="2014">
-                            <label for="Scec">SCEC Member:</label>
+                            <!-- <label for="Scec">SCEC Member:</label>
                             <select name="Scec" id="Scec">
                                 <option value="Select">Select</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
-                            </select>
+                            </select> -->
                         </div>
                         <div class="data">
                             <label for="phone">Phone Number:</label>
                             <input type="tel" id="phone" name="phone" required placeholder="Enter Your Number" >
                             <!-- <div style="height: 2vw"></div> -->
-                            <label for="dob">DOB:</label>
-                            <input type="date" id="dob" name="dob" required>
-                            <label for="Club_post">Club Post:</label>
+                            <!-- <label for="dob">DOB:</label>
+                            <input type="date" id="dob" name="dob" required> -->
+                            <!-- <label for="Club_post">Club Post:</label>
                             <select name="Club_post" id="Club_post">
                                 <option value="Select">Select</option>
                                 <option value="Member">Member</option>
                                 <option value="EC">EC</option>
                                 <option value="VicePresident">VicePresident</option>
                                 <option value="President">President</option>
-                            </select>
+                            </select> -->
                             <label for="Hostel">Hostel:</label>
                             <select name="Hostel" id="hostel">
                                 <option value="select">Select</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
-                            <label for="Department">Specialization:</label>
-                            <input type="text" id="dept" name="Department" placeholder="Specialization">
+                            <label for="hname">Hostel Name:</label>
+                            <select name="hname" id="hname">
+                                <option value="none">Select</option>
+                                <option value="Bhagat Singh">Bhagat Singh Hostel</option>
+                                <option value="Kalpana Chawala">Kalpana Chawala</option>
+                                <option value="Gargi">Gargi</option>
+                                <option value="Homi Bhabha">Homi Bhabha</option>
+                                <option value="Vikram Sarabai">Vikram Sarabai</option>
+                                <option value="APJ Abdul Kalam">APJ Abdul Kalam</option>
+                            </select>
+                            <label for="Rnumber">Enrollment Number:</label>
+                            <input type="number" name="Rnumber" id="Enumber" placeholder="Enrollment Number" required min="140000" >
+                            <!-- <label for="Department">Specialization:</label>
+                            <input type="text" id="dept" name="Department" placeholder="Specialization"> -->
                             <button id="submitbtn">Submit</button>
                         </div>
                         <div class="data">
@@ -100,16 +110,6 @@
                             </select>
                             <label for="Rnumber">Registration Number:</label>
                             <input type="number" name="Rnumber" id="Rnumber" placeholder="Registration Number" required min="140000" >
-                            <label for="hname">Hostel Name:</label>
-                            <select name="hname" id="hname">
-                                <option value="none">Select</option>
-                                <option value="Bhagat Singh">Bhagat Singh Hostel</option>
-                                <option value="Kalpana Chawala">Kalpana Chawala</option>
-                                <option value="Gargi">Gargi</option>
-                                <option value="Homi Bhabha">Homi Bhabha</option>
-                                <option value="Vikram Sarabai">Vikram Sarabai</option>
-                                <option value="APJ Abdul Kalam">APJ Abdul Kalam</option>
-                            </select>
                             <label for="profilepic">Profile Picture:</label>
                             <input type="file" id="ppic" accept=".jpg, .jpeg, .png">
                         </div>
@@ -121,23 +121,23 @@
     <script src="https://kit.fontawesome.com/d91f0db9b6.js" crossorigin="anonymous"></script>
     <script src="./script.js"></script>
     <script>
-        const exportButton=document.getElementById("export");
-exportButton.addEventListener("click",()=>{
-    window.location.href="/samplecsv";
-});
+        document.getElementById('import').addEventListener('click', function() {
+            document.getElementById('fileInput').click();
+        });
 
-
-document.getElementById('import').addEventListener('click', async function() {
-    await document.getElementById('fileInput').click();
-});
-
-document.getElementById('fileInput').addEventListener('change',async  function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        document.getElementById("exportForm").submit();
-
-    }
-});
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const csvContent = e.target.result;
+                    // Here you can process the CSV content
+                    console.log(csvContent); // For demonstration, log the CSV content
+                    // You can parse the CSV content and populate the form or send it to the server
+                };
+                reader.readAsText(file);
+            }
+        });
     </script>
 </body>
 </html>
