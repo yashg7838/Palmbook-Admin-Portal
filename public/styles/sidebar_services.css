@@ -1,7 +1,12 @@
 .side{
-    height: 50vw;
+    height: 52vw;
     background-color: white;
     border-right: 0.12vw solid rgb(206, 206, 206);
+}
+#logo{
+    width: 12vw;
+    margin:5vw 3vw 3vw;
+    cursor: pointer;
 }
 .side h2{
     margin:3vw 3vw 3vw;
@@ -13,7 +18,7 @@
     font-family: 'poppins', sans-serif !important;
     font-size: 1.5vw;
     /* margin-left: 1vw; */
-    /* text-align: center; */
+    text-align: center;
     list-style-type: none;
 }
 .side ul li button{
@@ -29,6 +34,7 @@
 #bullet{
     font-size: 1vw;
 }
-img{
-    width: 12vw;
+
+#secondary{
+    text-align: left;
 }

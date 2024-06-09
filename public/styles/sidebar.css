@@ -1,13 +1,12 @@
 .side{
-    height: 50vw;
+    height: 52vw;
     background-color: white;
     border-right: 0.12vw solid rgb(206, 206, 206);
 }
-.side h2{
-    margin:3vw 3vw 3vw;
-    font-size: 2vw;
-    font-weight: 100;
-    font-family: 'poppins', sans-serif !important;
+#logo{
+    width: 12vw;
+    margin:5vw 3vw 3vw;
+    cursor: pointer;
 }
 .side ul{
     font-family: 'poppins', sans-serif !important;
@@ -52,7 +51,7 @@
 
 ul {
     /* display: none; Initially hide the side menu */
-    width: 200px;
+    /* width: 200px; */
     background-color: #f4f4f4;
     padding: 20px;
 }
@@ -60,7 +59,4 @@ ul {
 ul.show {
     display: block;
 }
-img{
-    width: 13vw;
 
-}
