@@ -21,7 +21,7 @@ input:focus {
     background-color: white;
     display: grid;
     width: 100%;
-    height: 58vw;
+    height: 50vw;
     grid-template-rows: 6vw 5vw 39vw;
 }
 .tag{
