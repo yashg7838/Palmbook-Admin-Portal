@@ -11,3 +11,7 @@ function modes(){
     document.getElementById("nav").style.backgroundColor="black";
 }
 
+const exportButton=document.getElementById("export");
+exportButton.addEventListener("click",()=>{
+    window.location.href="/samplecsv";
+});

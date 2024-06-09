@@ -1,13 +1,17 @@
 "use strict"
 // Required Node Modules
-import express from "express";
+import express, { json } from "express";
+import {Parser} from"json2csv";
 import session from "express-session";
 import "dotenv/config";
+import fs from "fs";
+import fileUpload from "express-fileupload";
+import csv from "csv-parser";
 
 // Import the functions you need from the SDKs you need
 import * as firebase from "firebase/app";
-import { getAuth, signInWithEmailAndPassword,sendPasswordResetEmail,EmailAuthProvider,reauthenticateWithCredential, updatePassword,createUserWithEmailAndPassword, signOut } from "firebase/auth";
-import { getFirestore, getDoc, doc, setDoc } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, EmailAuthProvider, reauthenticateWithCredential, updatePassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { getFirestore, collection, doc, query, where, getDocs, setDoc, addDoc } from "firebase/firestore";
 
 
 
@@ -23,9 +27,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebaesApp = firebase.initializeApp(firebaseConfig);
-const db = getFirestore(firebaesApp)
-const auth = getAuth(firebaesApp);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp)
+const auth = getAuth(firebaseApp);
 
 auth.setPersistence("none");
 function checkAuthentication(req, res, next) {
@@ -40,11 +44,14 @@ function checkAuthentication(req, res, next) {
     }
 }
 
-export async function addUser(db,collection, data) {
+export async function addUser(db, data) {
     try {
-        await setDoc(doc(db, collection, data.email), data)
-    
+        const email = data.email;
+        const password = "123456";
+        const userRecord = await createUserWithEmailAndPassword(auth, email, password);
+        const uid = userRecord.user.uid;
 
+        const docRef = await setDoc(doc(db, "users", uid), data);
     } catch (e) {
         console.error("Error adding user: ", e);
         return null;
@@ -64,6 +71,7 @@ const port = process.env.PORT;
 // use Body-Parser
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(fileUpload());
 
 app.use(
     session(
@@ -83,14 +91,14 @@ app.use(
 app.get(
     "/", (req, res) => {
         const message = req.query.message || ""
-        return res.render("index.ejs",{message});
+        return res.render("index.ejs", { message });
     }
 );
 
 app.get(
     "/home", checkAuthentication, (req, res) => {
         const message = req.query.message || ""
-        res.render("home.ejs",{message});
+        res.render("home.ejs", { message });
     }
 );
 app.get(
@@ -102,7 +110,7 @@ app.get(
 app.get(
     "/faculty", checkAuthentication, (req, res) => {
         const message = req.query.message || ""
-        res.render("faculty.ejs",{message});
+        res.render("faculty.ejs", { message });
 
     }
 );
@@ -110,7 +118,7 @@ app.get(
     "/student", checkAuthentication, (req, res) => {
 
         const message = req.query.message || ""
-        return res.render("student.ejs",{message});
+        return res.render("student.ejs", { message });
 
     });
 app.get(
@@ -138,24 +146,75 @@ app.get(
     }
 );
 app.get(
-    "/changepswd", (req, res) => {
+    "/changepswd", checkAuthentication, (req, res) => {
         res.render("changepswd.ejs")
     }
 )
-app.post("/student", async (req, res) => {
-    await addUser(db,"student", req.body)
+app.post("/student", checkAuthentication, async (req, res) => {
+    await addUser(db, req.body)
 
-    res.redirect("/student?message=Faculty Added");
+    res.redirect("/student?message=Student Added");
 })
-app.post("/faculty", async (req, res) => {
-    await addUser(db,"faculty", req.body)
+app.post("/faculty", checkAuthentication, async (req, res) => {
+    await addUser(db, req.body)
 
     res.redirect("/faculty?message=Faculty Added");
 })
 
+app.get(
+    "/samplecsv", (req, res) => {
+        const fields = ['Name', 'batch', 'course', 'Hostel', 'RegistrationNumber', 'EnrollmentNumber', 'club'];
+        const sampledata = {};
+        
+        const json2csvParser =new Parser({fields,header:true});
+        const csv = json2csvParser.parse(sampledata);
+           res.setHeader('Content-disposition', 'attachment; filename=sample.csv');
+            res.set('Content-Type', 'text/csv');
+            res.send(csv);
+        
+    }
+)
 
-app.post("/others", async (req, res) => {
-    await addUser(db,"users", req.body)
+app.post(
+    "/uploadcsv",async (req,res)=>{
+
+
+        if(!req.files || Object.keys(req.files).length === 0){
+            res.redirect("/home?message=No Files or Empty file was uplaoded");
+        }
+        const uploadFile=req.files.file;
+
+        const FilePath ="./temp.csv";
+        await uploadFile.mv(FilePath);
+
+
+        const results=[];
+
+        fs.createReadStream(FilePath)
+        .pipe(csv())
+        .on('data',(data)=>{
+            results.push(data);
+        })
+        .on("end",async()=>{
+            for(const row of results){
+                try{
+                    await addDoc(collection(db,"users"),row);
+                }
+                catch(error){
+                    console.log(error);
+                }
+            }
+        });
+
+        res.redirect("/student?message=Upload Successful");
+
+
+
+
+    }
+)
+app.post("/others", checkAuthentication, async (req, res) => {
+    await addUser(db, req.body)
 
     res.redirect("/other")
 })
@@ -173,33 +232,39 @@ app.get(
 
 app.post(
     "/", (req, res) => {
-        
+
         signInWithEmailAndPassword(auth, req.body.username, req.body.password).then(
             user => {
                 res.redirect("/home")
             }
         )
-        .catch(
-            err=>{
-                res.redirect("/?message=Incorrect email or password");
-            }
-        )
+            .catch(
+                err => {
+                    res.redirect("/?message=Incorrect email or password");
+                }
+            )
     }
 )
-app.post("/register", async (req, res) => {
+app.post("/register", checkAuthentication, async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
         // Check if email already exists in Firestore
-        const snapshot = await getDoc(doc(db, "users", email))
+        const q = query(collection(db, "users"),
+            where("email", "==", email),
+            where("user", "==", "admin")
+        );
+
+        const snapshot = await getDocs(q);
 
 
-        if (snapshot.data() === undefined) {
+        if (snapshot.empty) {
             return res.redirect("/other?message=Email does not exist");
         }
 
-        // If email doesn't exist, create user with Firebase Authentication
+        // If email exists, create user with Firebase Authentication
         const userRecord = await createUserWithEmailAndPassword(auth, email, password);
+        console.log(userRecord.user.uid);
 
         res.redirect("/register?message=Registration Successful")
     } catch (error) {
@@ -209,49 +274,49 @@ app.post("/register", async (req, res) => {
 });
 
 app.post(
-    "/changepswd",(req,res)=>{
-        const user=auth.currentUser;
+    "/changepswd", (req, res) => {
+        const user = auth.currentUser;
 
-        const CurrentPassword=req.body.CurrentPassword;
-        const NewPassword=req.body.NewPassword;
-        if(user!==null){
-            const email=user.email;
-            const credential =EmailAuthProvider.credential(email,CurrentPassword);
-            reauthenticateWithCredential(user, credential).then(()=>{
-            updatePassword(user,NewPassword).then(()=>{
-                res.redirect("/home?message=Password changed");
-                }).catch((err)=>{
+        const CurrentPassword = req.body.CurrentPassword;
+        const NewPassword = req.body.NewPassword;
+        if (user !== null) {
+            const email = user.email;
+            const credential = EmailAuthProvider.credential(email, CurrentPassword);
+            reauthenticateWithCredential(user, credential).then(() => {
+                updatePassword(user, NewPassword).then(() => {
+                    res.redirect("/home?message=Password changed");
+                }).catch((err) => {
                     console.log(err);
                     res.redirect("/home?message=Error in resetting the password");
                 }
                 )
-        }
-        )
-        .catch(
-            err=>{
-                console.log(err);
-                res.redirect("/?message=Incorrect password");
             }
-        )
-    }
+            )
+                .catch(
+                    err => {
+                        console.log(err);
+                        res.redirect("/?message=Incorrect password");
+                    }
+                )
+        }
     }
 );
 
 
 app.post(
-    "/reset-password", (req,res)=>{
+    "/reset-password", (req, res) => {
 
-        const email =req.body.email;
+        const email = req.body.email;
         sendPasswordResetEmail(auth, email)
-        .then(() => {
-            res.redirect("/?message=Password Reset Link Sent");
-        })
-        .catch((error) => {
-            if(error.code=="auth/missing-email"){
-                res.redirect("/?message=Email Don't Exist in Database");    
-            }
-            res.redirect("/?message=Error sending password reset email");
-        });
+            .then(() => {
+                res.redirect("/?message=Password Reset Link Sent");
+            })
+            .catch((error) => {
+                if (error.code == "auth/missing-email") {
+                    res.redirect("/?message=Email Don't Exist in Database");
+                }
+                res.redirect("/?message=Error sending password reset email");
+            });
     }
 );
 
