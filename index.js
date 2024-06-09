@@ -165,7 +165,7 @@ app.post("/student", checkAuthentication, async (req, res) => {
 
 app.get(
     "/samplecsv", (req, res) => {
-        const fields = ['Name', 'batch', 'course', 'Hostel', 'RegistrationNumber', 'EnrollmentNumber', 'club'];
+        const fields = ['Name','email', 'batch', 'course', 'Hostel', 'RegistrationNumber', 'EnrollmentNumber', 'club'];
         const sampledata = {};
         
         const json2csvParser =new Parser({fields,header:true});
