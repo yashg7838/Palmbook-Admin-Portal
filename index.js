@@ -40,22 +40,22 @@ function checkAuthentication(req, res, next) {
         next();
     } else {
         // If the user is not authenticated, redirect to the home page (or any other page)
-        res.redirect("/");
+        res.redirect("/login");
     }
 }
 
 export async function addUser(db, data) {
-    try {
+        try{
         const email = data.email;
         const password = "123456";
         const userRecord = await createUserWithEmailAndPassword(auth, email, password);
         const uid = userRecord.user.uid;
-
         const docRef = await setDoc(doc(db, "users", uid), data);
-    } catch (e) {
-        console.error("Error adding user: ", e);
-        return null;
-    }
+        }catch(err){
+            console.log(err);
+            return null;
+        }
+    
 }
 
 
@@ -89,7 +89,13 @@ app.use(
 
 // gateways
 app.get(
-    "/", (req, res) => {
+    "/",checkAuthentication, (req, res) => {
+        return res.redirect("/home");
+    }
+);
+
+app.get(
+    "/login", (req, res) => {
         const message = req.query.message || ""
         return res.render("index.ejs", { message });
     }
@@ -129,7 +135,8 @@ app.get(
 
 app.get(
     "/other", checkAuthentication, (req, res) => {
-        res.render("other.ejs");
+        const message = req.query.message || ""
+        res.render("other.ejs",{message});
     }
 );
 app.get(
@@ -154,11 +161,6 @@ app.post("/student", checkAuthentication, async (req, res) => {
     await addUser(db, req.body)
 
     res.redirect("/student?message=Student Added");
-})
-app.post("/faculty", checkAuthentication, async (req, res) => {
-    await addUser(db, req.body)
-
-    res.redirect("/faculty?message=Faculty Added");
 })
 
 app.get(
@@ -198,15 +200,19 @@ app.post(
         .on("end",async()=>{
             for(const row of results){
                 try{
-                    await addDoc(collection(db,"users"),row);
+                    console.log(row);
+                    await addUser(db,row);
+                    
                 }
                 catch(error){
-                    console.log(error);
+                    console.log("coming here");
+                    res.redirect("/other?message=Error Uploading File");
+                    // console.log(error);
                 }
             }
+            res.redirect("/student?message=Upload Successful");
         });
 
-        res.redirect("/student?message=Upload Successful");
 
 
 
@@ -214,9 +220,13 @@ app.post(
     }
 )
 app.post("/others", checkAuthentication, async (req, res) => {
+    try{
     await addUser(db, req.body)
-
     res.redirect("/other")
+    }catch(err){
+        res.redirect("/other?message=Error Registering User");
+        console.log(err);
+    }
 })
 app.get(
     "/logout", (req, res) => {
@@ -268,8 +278,8 @@ app.post("/register", checkAuthentication, async (req, res) => {
 
         res.redirect("/register?message=Registration Successful")
     } catch (error) {
-        console.error("Error registering person: ", error);
         res.redirect("/register?message=Registration failed")
+        console.error("Error registering person: ", error);
     }
 });
 
@@ -294,8 +304,8 @@ app.post(
             )
                 .catch(
                     err => {
-                        console.log(err);
                         res.redirect("/?message=Incorrect password");
+                        console.log(err);
                     }
                 )
         }
