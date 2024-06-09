@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="./styles/sidebar.css">
     <link rel="stylesheet" href="./styles/navbar.css">
 </head>
+
 <body>
     <div class="container" id="contain">
         <% if (message) { %>
@@ -16,77 +18,99 @@
                 <button type="button" class="close" onclick="this.parentElement.style.display='none';">&times;</button>
                 <%= message %>
             </div>
-        <% } %>
-        <%- include("sidebar.ejs")%>
-        <div class="main" id="main">
-            <%- include("navbar.ejs") %>
-            <div class="tag" id="tag">
-                <p id="head">Other Registration</p>
-                <button id="export" ><i class="fa-solid fa-file-export"></i> Export</button>
-                <button id="save"><i class="fa-solid fa-file-import"></i> Import</button>
-            </div>
-            <div class="content" id="cont">
-                <h2>Personal Details</h2>
-                <div style="height: 0.8vw;"></div>
-                <form class="details" action="/others" method="POST">
-                    <div class="data">
-                        <div id="form1">
-                            <label for="name">Full Name:</label><br>
-                            <input type="text" id="name" name="name" placeholder="Enter Full Name" ><br>
-                            <div style="height: 2vw;"></div>
-                            <label for="email" id="mail">Email ID:</label><br>
-                            <input type="email" id="email" name="email" placeholder="Enter Email Id" >
-                        </div>
-                    </div>
-                    <div class="data1">
-                        <div id="form2">
-                            <label for="phone">Phone Number:</label>
-                            <input type="tel" id="phone" name="phone" placeholder="Mobile Number" ><br>
-                            <div style="height: 2vw"></div>
-                            <label for="user">User Type:</label><br>
-                            <select id="user" name="user">
-                                <option value="none" >Select</option>
-                                <option value="Faculty">Faculty</option>
-                                <option value="Admin">Admin</option>
-                                <option value="Warden">Warden</option>
-                                <option value="Security">Security Guard</option>
-                            </select><br>
-                        </div>
-                    </div>
-                    <div class="data2">
-                        <div id="form3">
-                            <label for="gender" id="gen">Gender:</label><br>
-                            <select id="gender" name="gender">
-                                <option value="none" >Select</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select><br>
-                            <div style="height: 2vw;"></div>
-                            <!-- <label for="Designation">Designation:</label>
-                            <input type="text" id="desig" name="designation" placeholder="Designation"> -->
-                            <div id="form4">
-                                <label for="Date of joining">Date of joining:</label><br>
-                                <input type="date" id="doj" name="Date of joining">
-                                <div style="height: 2vw;"></div>
+            <% } %>
+                <%- include("sidebar.ejs")%>
+                    <div class="main" id="main">
+                        <%- include("navbar.ejs") %>
+                            <div class="tag" id="tag">
+                                <p id="head">Other Registration</p>
+                                <button id="exportOther"><i class="fa-solid fa-file-export"></i> Export</button>
+                                <form method="post" action="/uploadcsv" id="exportForm" enctype="multipart/form-data">
+                                    <input type="file" id="fileInput" name="file" style="display:none;">
+                                </form>
+                                <button id="import"><i class="fa-solid fa-file-import"></i> Import</button>
                             </div>
-                        </div>
-                    </div>
-                    <div class="data3">
-                        <!-- <div id="form4">
+                            <div class="content" id="cont">
+                                <h2>Personal Details</h2>
+                                <div style="height: 0.8vw;"></div>
+                                <form class="details" action="/others" method="POST">
+                                    <div class="data">
+                                        <div id="form1">
+                                            <label for="name">Full Name:</label><br>
+                                            <input type="text" id="name" name="name" placeholder="Enter Full Name"><br>
+                                            <div style="height: 2vw;"></div>
+                                            <label for="email" id="mail">Email ID:</label><br>
+                                            <input type="email" id="email" name="email" placeholder="Enter Email Id">
+                                        </div>
+                                    </div>
+                                    <div class="data1">
+                                        <div id="form2">
+                                            <label for="phone">Phone Number:</label>
+                                            <input type="tel" id="phone" name="phone" placeholder="Mobile Number"><br>
+                                            <div style="height: 2vw"></div>
+                                            <label for="user">User Type:</label><br>
+                                            <select id="user" name="user">
+                                                <option value="none">Select</option>
+                                                <option value=faculty">Faculty</option>
+                                                <option value="admin">Admin</option>
+                                                <option value="warden">Warden</option>
+                                                <option value="guard">Security Guard</option>
+                                                <option value="mess">Mess Committee</option>
+                                            </select><br>
+                                        </div>
+                                    </div>
+                                    <div class="data2">
+                                        <div id="form3">
+                                            <label for="gender" id="gen">Gender:</label><br>
+                                            <select id="gender" name="gender">
+                                                <option value="none">Select</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select><br>
+                                            <div style="height: 2vw;"></div>
+                                            <!-- <label for="Designation">Designation:</label>
+                            <input type="text" id="desig" name="designation" placeholder="Designation"> -->
+                                            <div id="form4">
+                                                <label for="Date of joining">Date of joining:</label><br>
+                                                <input type="date" id="doj" name="Date of joining">
+                                                <div style="height: 2vw;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="data3">
+                                        <!-- <div id="form4">
                             <label for="Date of joining">Date of joining:</label><br>
                             <input type="date" id="doj" name="Date of joining">
                             <div style="height: 2vw;"></div>
                         </div> -->
+                                    </div>
+                                    <div class="data4">
+                                        <div style="height: 4vw;"></div>
+                                        <button type="submit" id="submitbtn">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
                     </div>
-                    <div class="data4">
-                        <div style="height: 4vw;"></div>
-                        <button type="submit" id="submitbtn">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
     <script src="https://kit.fontawesome.com/d91f0db9b6.js" crossorigin="anonymous"></script>
     <script src="./script.js"></script>
+    <script>
+        const exportButtonOther = document.getElementById("exportOther");
+        exportButtonOther.addEventListener("click", () => {
+            window.location.href = "/samplecsvOther";
+        });
+        document.getElementById('import').addEventListener('click', async function () {
+            await document.getElementById('fileInput').click();
+        });
+
+        document.getElementById('fileInput').addEventListener('change', async function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                document.getElementById("exportForm").submit();
+
+            }
+        });
+    </script>
 </body>
+
 </html>

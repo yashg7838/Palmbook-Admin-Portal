@@ -50,6 +50,7 @@ export async function addUser(db, data) {
         const password = "123456";
         const userRecord = await createUserWithEmailAndPassword(auth, email, password);
         const uid = userRecord.user.uid;
+        data.uid=uid;
         const docRef = await setDoc(doc(db, "users", uid), data);
         }catch(err){
             console.log(err);
@@ -114,13 +115,6 @@ app.get(
     }
 );
 app.get(
-    "/faculty", checkAuthentication, (req, res) => {
-        const message = req.query.message || ""
-        res.render("faculty.ejs", { message });
-
-    }
-);
-app.get(
     "/student", checkAuthentication, (req, res) => {
 
         const message = req.query.message || ""
@@ -176,6 +170,19 @@ app.get(
         
     }
 )
+app.get(
+    "/samplecsvOther", (req, res) => {
+        const fields = ['Name','PhoneNumber', 'Gender', 'email', 'User Type', 'Date Of Joining'];
+        const sampledata = {};
+        
+        const json2csvParser =new Parser({fields,header:true});
+        const csv = json2csvParser.parse(sampledata);
+           res.setHeader('Content-disposition', 'attachment; filename=sample.csv');
+            res.set('Content-Type', 'text/csv');
+            res.send(csv);
+        
+    }
+)
 
 app.post(
     "/uploadcsv",async (req,res)=>{
@@ -200,14 +207,12 @@ app.post(
         .on("end",async()=>{
             for(const row of results){
                 try{
-                    console.log(row);
                     await addUser(db,row);
                     
                 }
                 catch(error){
-                    console.log("coming here");
                     res.redirect("/other?message=Error Uploading File");
-                    // console.log(error);
+                    console.log(error);
                 }
             }
             res.redirect("/student?message=Upload Successful");

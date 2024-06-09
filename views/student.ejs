@@ -121,17 +121,23 @@
     <script src="https://kit.fontawesome.com/d91f0db9b6.js" crossorigin="anonymous"></script>
     <script src="./script.js"></script>
     <script>
-        document.getElementById('import').addEventListener('click', async function() {
-            await document.getElementById('fileInput').click();
-        });
+        const exportButton=document.getElementById("export");
+exportButton.addEventListener("click",()=>{
+    window.location.href="/samplecsv";
+});
 
-        document.getElementById('fileInput').addEventListener('change',async  function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                document.getElementById("exportForm").submit();
 
-            }
-        });
+document.getElementById('import').addEventListener('click', async function() {
+    await document.getElementById('fileInput').click();
+});
+
+document.getElementById('fileInput').addEventListener('change',async  function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        document.getElementById("exportForm").submit();
+
+    }
+});
     </script>
 </body>
 </html>
