@@ -8,14 +8,14 @@ import fs from "fs";
 import fileUpload from "express-fileupload";
 import csv from "csv-parser";
 
-// Import the functions you need from the SDKs you need
+// Required Firebase functions
 import * as firebase from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, EmailAuthProvider, reauthenticateWithCredential, updatePassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { getFirestore, collection, doc, query, where, getDocs, setDoc, addDoc } from "firebase/firestore";
 
 
 
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
     apiKey: process.env.apiKey,
     authDomain: process.env.authDomain,
@@ -26,7 +26,6 @@ const firebaseConfig = {
     appId: process.env.appId
 };
 
-// Initialize Firebase
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp)
 const auth = getAuth(firebaseApp);
@@ -34,12 +33,12 @@ const auth = getAuth(firebaseApp);
 auth.setPersistence("none");
 function checkAuthentication(req, res, next) {
     auth
-    // Check if the currentUser is not null in your authentication system (e.g., Firebase Authentication)
+    // Check if the currentUser is not null in your authentication system
     if (auth.currentUser !== null) {
-        // If the user is authenticated, proceed to the next middleware or route handler
+        // If the user is authenticated, proceed to the next middleware
         next();
     } else {
-        // If the user is not authenticated, redirect to the home page (or any other page)
+        // If the user is not authenticated, redirect to the home page
         res.redirect("/login");
     }
 }
@@ -65,8 +64,6 @@ export async function addUser(db, data) {
 // Define const
 const app = express();
 const port = process.env.PORT;
-
-// Connect to pg client
 
 
 // use Body-Parser
@@ -190,13 +187,13 @@ app.get(
 )
 
 app.get(
-    "/mess",(req,res)=>{
+    "/mess",checkAuthentication,(req,res)=>{
         res.render("messuser.ejs");
     });
 
 
 app.post(
-    "/mess",async (req,res)=>{
+    "/mess",checkAuthentication,async (req,res)=>{
         try{
         const date=req.body.date;
         // console.log(date);
