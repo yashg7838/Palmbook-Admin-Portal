@@ -155,7 +155,7 @@ app.post("/student", checkAuthentication, async (req, res) => {
 
     req.body.SCEC="no";
     req.body.Campus="In";
-    req.body.post="member";
+    req.body.CLub_Post="member";
     await addUser(db, req.body) 
 
     res.redirect("/student?message=Student Added");
@@ -163,7 +163,7 @@ app.post("/student", checkAuthentication, async (req, res) => {
 
 app.get(
     "/samplecsv", (req, res) => {
-        const fields = ['Name','email', 'batch', 'course', 'Hostel', 'RegistrationNumber', 'EnrollmentNumber', 'club'];
+        const fields = ['Name','Phone_Number','gender','email','course','club','Hostel','RegistrationNumber','batch','EnrollmentNumber'];
         const sampledata = {};
         
         const json2csvParser =new Parser({fields,header:true});
@@ -174,6 +174,7 @@ app.get(
         
     }
 )
+
 app.get(
     "/samplecsvOther", (req, res) => {
         const fields = ['Name','PhoneNumber', 'Gender', 'email', 'User Type', 'Date Of Joining'];
@@ -185,6 +186,27 @@ app.get(
             res.set('Content-Type', 'text/csv');
             res.send(csv);
         
+    }
+)
+
+app.get(
+    "/mess",(req,res)=>{
+        res.render("messuser.ejs");
+    });
+
+
+app.post(
+    "/mess",async (req,res)=>{
+        try{
+        const date=req.body.date;
+        // console.log(date);
+        // console.log(req.body);
+        await setDoc(doc(db, "mess", date), req.body);
+        }
+        catch(err){
+            console.log(err);
+        }
+        res.redirect("/mess");
     }
 )
 
@@ -213,7 +235,7 @@ app.post(
                 try{
                     row.SCEC="no";
                     row.Campus="In";
-                    row.post="member";
+                    row.Club_Post="member";
                     await addUser(db,row);
                     
                 }
@@ -298,7 +320,6 @@ app.post("/register", checkAuthentication, async (req, res) => {
 app.post(
     "/changepswd", (req, res) => {
         const user = auth.currentUser;
-
         const CurrentPassword = req.body.CurrentPassword;
         const NewPassword = req.body.NewPassword;
         if (user !== null) {

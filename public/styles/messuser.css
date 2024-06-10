@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
+*{
+    padding: 0%;
+    margin: 0%;
+}
+label{
+    font-weight: 100;
+    font-family: 'poppins', sans-serif !important;
+    font-size: 1.5vw;
+}
+input:focus {
+    outline: none;
+}
+input{
+    font-size: 1vw;
+    border: 0.1vw solid black;
+    border-radius: 0.5vw;
+    font-family: 'poppins', sans-serif !important;
+    text-align: center;
+    width: 20vw;
+    margin-bottom: 1vw;
+}
+form{
+    margin:18vw 35vw 0vw;
+    /* margin-left: 35vw; */
+}
+#submitbtn{
+    font-size: 1.5vw;
+    font-family: 'poppins', sans-serif !important;
+    text-align: center;
+    width: 10vw;
+    margin-top: 2vw;
+    margin-left: 5.2vw;
+    background-color: rgba(97, 67, 230, 0.767);
+    border-width: 0;
+    color: white;
+    cursor: pointer;
+    border-radius: 0.4vw;
+}
+#Date{
+    margin-left: 4vw;
+}
+
+#Breakfast{
+    margin-left: 0.4vw;
+}
+#Lunch{
+    margin-left: 3.1vw;
+}
+#Snacks{
+    margin-left: 2.25vw;
+}
+#Dinner{
+    margin-left: 2.8vw;
+}
