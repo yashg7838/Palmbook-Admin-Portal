@@ -1,7 +1,7 @@
 "use strict"
 // Required Node Modules
 import express, { json } from "express";
-import {Parser} from"json2csv";
+import { Parser } from "json2csv";
 import session from "express-session";
 import "dotenv/config";
 import fs from "fs";
@@ -11,7 +11,7 @@ import csv from "csv-parser";
 // Required Firebase functions
 import * as firebase from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, EmailAuthProvider, reauthenticateWithCredential, updatePassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
-import { getFirestore, collection, doc, query, where, getDocs, setDoc, addDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, query, where, getDocs, setDoc, addDoc, getDoc, snapshotEqual } from "firebase/firestore";
 
 
 
@@ -35,8 +35,49 @@ function checkAuthentication(req, res, next) {
     auth
     // Check if the currentUser is not null in your authentication system
     if (auth.currentUser !== null) {
+        const q = query(collection(db, "users"),
+            where("email", "==", auth.currentUser.email),
+            where("user", "==", "admin")
+
+        );
+        getDocs(q).then(
+            snapshot => {
+                if (!snapshot.empty) {
+
+                    next();
+                } else {
+                    res.redirect("/login");
+
+                }
+            }
+        )
         // If the user is authenticated, proceed to the next middleware
-        next();
+    } else {
+        // If the user is not authenticated, redirect to the home page
+        res.redirect("/login");
+    }
+}
+function checkAuthenticationMess(req, res, next) {
+    auth
+    // Check if the currentUser is not null in your authentication system
+    if (auth.currentUser !== null) {
+        const q = query(collection(db, "users"),
+            where("email", "==", auth.currentUser.email),
+            where("user", "==", "mess")
+
+        );
+        getDocs(q).then(
+            snapshot => {
+                if (!snapshot.empty) {
+
+                    next();
+                } else {
+                    res.redirect("/login");
+
+                }
+            }
+        )
+        // If the user is authenticated, proceed to the next middleware
     } else {
         // If the user is not authenticated, redirect to the home page
         res.redirect("/login");
@@ -44,18 +85,18 @@ function checkAuthentication(req, res, next) {
 }
 
 export async function addUser(db, data) {
-        try{
+    try {
         const email = data.email;
         const password = "123456";
         const userRecord = await createUserWithEmailAndPassword(auth, email, password);
         const uid = userRecord.user.uid;
-        data.uid=uid;
+        data.uid = uid;
         const docRef = await setDoc(doc(db, "users", uid), data);
-        }catch(err){
-            console.log(err);
-            return null;
-        }
-    
+    } catch (err) {
+        console.log(err);
+        return null;
+    }
+
 }
 
 
@@ -87,7 +128,7 @@ app.use(
 
 // gateways
 app.get(
-    "/",checkAuthentication, (req, res) => {
+    "/", checkAuthentication, (req, res) => {
         return res.redirect("/home");
     }
 );
@@ -127,7 +168,7 @@ app.get(
 app.get(
     "/other", checkAuthentication, (req, res) => {
         const message = req.query.message || ""
-        res.render("other.ejs",{message});
+        res.render("other.ejs", { message });
     }
 );
 app.get(
@@ -150,57 +191,59 @@ app.get(
 )
 app.post("/student", checkAuthentication, async (req, res) => {
 
-    req.body.SCEC="no";
-    req.body.Campus="In";
-    req.body.CLub_Post="member";
-    await addUser(db, req.body) 
+    req.body.SCEC = "no";
+    req.body.Campus = "In";
+    req.body.CLub_Post = "member";
+    req.body['User Type'] = "student";
+    await addUser(db, req.body)
+
 
     res.redirect("/student?message=Student Added");
 })
 
 app.get(
     "/samplecsv", (req, res) => {
-        const fields = ['Name','Phone_Number','gender','email','course','club','Hostel','RegistrationNumber','batch','EnrollmentNumber'];
+        const fields = ['Name', 'Phone_Number', 'gender', 'email', 'course', 'club', 'Hostel', 'RegistrationNumber', 'batch', 'EnrollmentNumber'];
         const sampledata = {};
-        
-        const json2csvParser =new Parser({fields,header:true});
+
+        const json2csvParser = new Parser({ fields, header: true });
         const csv = json2csvParser.parse(sampledata);
-           res.setHeader('Content-disposition', 'attachment; filename=sample.csv');
-            res.set('Content-Type', 'text/csv');
-            res.send(csv);
-        
+        res.setHeader('Content-disposition', 'attachment; filename=sample.csv');
+        res.set('Content-Type', 'text/csv');
+        res.send(csv);
+
     }
 )
 
 app.get(
     "/samplecsvOther", (req, res) => {
-        const fields = ['Name','PhoneNumber', 'Gender', 'email', 'User Type', 'Date Of Joining'];
+        const fields = ['Name', 'PhoneNumber', 'Gender', 'email', 'User Type', 'Date Of Joining'];
         const sampledata = {};
-        
-        const json2csvParser =new Parser({fields,header:true});
+
+        const json2csvParser = new Parser({ fields, header: true });
         const csv = json2csvParser.parse(sampledata);
-           res.setHeader('Content-disposition', 'attachment; filename=sample.csv');
-            res.set('Content-Type', 'text/csv');
-            res.send(csv);
-        
+        res.setHeader('Content-disposition', 'attachment; filename=sample.csv');
+        res.set('Content-Type', 'text/csv');
+        res.send(csv);
+
     }
 )
 
 app.get(
-    "/mess",checkAuthentication,(req,res)=>{
+    "/mess", checkAuthenticationMess, (req, res) => {
         res.render("messuser.ejs");
     });
 
 
 app.post(
-    "/mess",checkAuthentication,async (req,res)=>{
-        try{
-        const date=req.body.date;
-        // console.log(date);
-        // console.log(req.body);
-        await setDoc(doc(db, "mess", date), req.body);
+    "/mess", checkAuthenticationMess, async (req, res) => {
+        try {
+            const date = req.body.date;
+            // console.log(date);
+            // console.log(req.body);
+            await setDoc(doc(db, "mess", date), req.body);
         }
-        catch(err){
+        catch (err) {
             console.log(err);
         }
         res.redirect("/mess");
@@ -208,41 +251,42 @@ app.post(
 )
 
 app.post(
-    "/uploadcsv",async (req,res)=>{
+    "/uploadcsv", async (req, res) => {
 
 
-        if(!req.files || Object.keys(req.files).length === 0){
+        if (!req.files || Object.keys(req.files).length === 0) {
             res.redirect("/home?message=No Files or Empty file was uplaoded");
         }
-        const uploadFile=req.files.file;
+        const uploadFile = req.files.file;
 
-        const FilePath ="./temp.csv";
+        const FilePath = "./temp.csv";
         await uploadFile.mv(FilePath);
 
 
-        const results=[];
+        const results = [];
 
         fs.createReadStream(FilePath)
-        .pipe(csv())
-        .on('data',(data)=>{
-            results.push(data);
-        })
-        .on("end",async()=>{
-            for(const row of results){
-                try{
-                    row.SCEC="no";
-                    row.Campus="In";
-                    row.Club_Post="member";
-                    await addUser(db,row);
-                    
+            .pipe(csv())
+            .on('data', (data) => {
+                results.push(data);
+            })
+            .on("end", async () => {
+                for (const row of results) {
+                    try {
+                        row.SCEC = "no";
+                        row.Campus = "In";
+                        row.Club_Post = "member";
+                        row['User Type'] = "student";
+                        await addUser(db, row);
+
+                    }
+                    catch (error) {
+                        res.redirect("/other?message=Error Uploading File");
+                        console.log(error);
+                    }
                 }
-                catch(error){
-                    res.redirect("/other?message=Error Uploading File");
-                    console.log(error);
-                }
-            }
-            res.redirect("/student?message=Upload Successful");
-        });
+                res.redirect("/student?message=Upload Successful");
+            });
 
 
 
@@ -251,10 +295,10 @@ app.post(
     }
 )
 app.post("/others", checkAuthentication, async (req, res) => {
-    try{
-    await addUser(db, req.body)
-    res.redirect("/other")
-    }catch(err){
+    try {
+        await addUser(db, req.body);
+        res.redirect("/other")
+    } catch (err) {
         res.redirect("/other?message=Error Registering User");
         console.log(err);
     }
@@ -272,16 +316,51 @@ app.get(
 )
 
 app.post(
-    "/", (req, res) => {
+    "/login", (req, res) => {
 
         signInWithEmailAndPassword(auth, req.body.username, req.body.password).then(
             user => {
-                res.redirect("/home")
+                const q = query(collection(db, "users"),
+                    where("email", "==", req.body.username),
+                    where("user", "==", "admin")
+
+                );
+                const qMess = query(collection(db, "users"),
+                    where("email", "==", req.body.username),
+                    where("user", "==", "mess")
+
+                );
+
+
+                getDocs(q).then(
+                    snapshot => {
+                        if (!snapshot.empty) {
+                            res.redirect("/home")
+                        }
+                        else {
+
+                            getDocs(qMess).then(
+                                snapshot2 => {
+                                    if (!snapshot2.empty) {
+                                        res.redirect("/mess");
+                                    } else {
+                                        return res.redirect("/login?message=You Don't Have Access To the Website. Kindly Use App");
+                                    }
+                                }
+                            )
+
+                        }
+                    }
+                )
+
+
+
+
             }
         )
             .catch(
                 err => {
-                    res.redirect("/?message=Incorrect email or password");
+                    res.redirect("/login?message=Incorrect email or password");
                 }
             )
     }
