@@ -21,13 +21,13 @@ import { getFirestore, collection, doc, query, where, getDocs, setDoc, addDoc, g
 const __dirname = path.resolve();
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCK-HqFytwwiW87ey9TOJXVRXpvjpQq20E",
-    authDomain: "palmbook-admin.firebaseapp.com",
-    databaseURL: "https://palmbook-admin-default-rtdb.firebaseio.com",
-    projectId: "palmbook-admin",
-    storageBucket: "palmbook-admin.appspot.com",
-    messagingSenderId: "495472528955",
-    appId: "1:495472528955:web:8e9a89dd915fe31de7961e"
+    apiKey: process.env.apikey,
+    authDomain: process.env.authDomain,
+    databaseURL: process.env.databaseURL,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.messagingSenderId,
+    appId: process.env.appId
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
