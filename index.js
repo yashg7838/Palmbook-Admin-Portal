@@ -109,6 +109,7 @@ const port = 3000;
 
 // use Body-Parser
 app.set('view engine', 'ejs');
+app.set('views', './views');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(fileUpload());
