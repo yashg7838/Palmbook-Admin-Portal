@@ -6,8 +6,10 @@ import session from "express-session";
 import "dotenv/config";
 import fs from "fs";
 import fileUpload from "express-fileupload";
+import dotenv from 'dotenv';
+import path from 'path';
 import csv from "csv-parser";
-
+dotenv.config();
 // Required Firebase functions
 import * as firebase from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, EmailAuthProvider, reauthenticateWithCredential, updatePassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
@@ -15,6 +17,8 @@ import { getFirestore, collection, doc, query, where, getDocs, setDoc, addDoc, g
 
 
 
+// const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.resolve();
 // Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCK-HqFytwwiW87ey9TOJXVRXpvjpQq20E",
@@ -109,7 +113,9 @@ const port = 3000;
 
 // use Body-Parser
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 app.set('views', './views');
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(fileUpload());
