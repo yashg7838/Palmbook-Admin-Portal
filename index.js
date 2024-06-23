@@ -108,7 +108,7 @@ export async function addUser(db, data) {
 
 // Define const
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 
 // use Body-Parser
