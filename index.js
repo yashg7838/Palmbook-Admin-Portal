@@ -17,13 +17,13 @@ import { getFirestore, collection, doc, query, where, getDocs, setDoc, addDoc, g
 
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: process.env.apiKey,
-    authDomain: process.env.authDomain,
-    databaseURL: process.env.databaseURL,
-    projectId: process.env.projectId,
-    storageBucket: process.env.storageBucket,
-    messagingSenderId: process.env.MESSAGING_SENDER_ID,
-    appId: process.env.appId
+    apiKey: "AIzaSyCK-HqFytwwiW87ey9TOJXVRXpvjpQq20E",
+    authDomain: "palmbook-admin.firebaseapp.com",
+    databaseURL: "https://palmbook-admin-default-rtdb.firebaseio.com",
+    projectId: "palmbook-admin",
+    storageBucket: "palmbook-admin.appspot.com",
+    messagingSenderId: "495472528955",
+    appId: "1:495472528955:web:8e9a89dd915fe31de7961e"
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
@@ -104,13 +104,13 @@ export async function addUser(db, data) {
 
 // Define const
 const app = express();
-const port = process.env.PORT;
+const port = 3000;
 
 
 // use Body-Parser
-app.use(()=>{
-    console.log('Firebase API Key:', process.env.FIREBASE_API_KEY);
-})
+// app.use(()=>{
+//     console.log('Firebase API Key:', process.env.FIREBASE_API_KEY);
+// })
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(fileUpload());
