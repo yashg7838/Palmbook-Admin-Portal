@@ -108,9 +108,7 @@ const port = 3000;
 
 
 // use Body-Parser
-// app.use(()=>{
-//     console.log('Firebase API Key:', process.env.FIREBASE_API_KEY);
-// })
+app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(fileUpload());
