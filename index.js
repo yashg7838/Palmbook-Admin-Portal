@@ -133,7 +133,7 @@ app.use(
         }
     })
 );
-app.use(cors());
+// app.use(cors());
 
 // gateways
 app.get(
