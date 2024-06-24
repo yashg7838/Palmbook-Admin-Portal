@@ -9,6 +9,7 @@ import fileUpload from "express-fileupload";
 import dotenv from 'dotenv';
 import path from 'path';
 import csv from "csv-parser";
+import cors from "cors";
 dotenv.config();
 // Required Firebase functions
 import * as firebase from "firebase/app";
@@ -121,18 +122,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload());
 
 app.use(
-    session(
-        {
-            secret: "palmbook",
-            resave: false,
-            saveUninitialized: true,
-            cookie: {
-                maxAge: 1000 * 60 * 60 * 24,
-            }
+    session({
+        secret: "palmbook",
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24,
+            secure: process.env.NODE_ENV === 'production',  // Ensure secure cookies in production
+            sameSite: 'none',
         }
-    )
+    })
 );
-
+app.use(cors());
 
 // gateways
 app.get(
