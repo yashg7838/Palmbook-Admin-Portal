@@ -15,7 +15,7 @@ import {
   downloadStudentCSV,
   downloadUsersCSV,
   uploadCSV,
-} from "../services/csvservices.js";
+} from "../services/csvServices.js";
 
 const router = Router();
 router.get("/samplecsv", checkAuthentication, downloadStudentCSV);
