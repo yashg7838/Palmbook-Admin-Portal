@@ -1,67 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PalmBook</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-    <link rel="stylesheet" href="./styles/Student.css">
-    <link rel="stylesheet" href="./styles/sidebar.css">
-    <link rel="stylesheet" href="./styles/navbar.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link rel="stylesheet" href="./styles/Student.css" />
+    <link rel="stylesheet" href="./styles/sidebar.css" />
+    <link rel="stylesheet" href="./styles/navbar.css" />
+  </head>
+  <body>
     <div class="container">
-        <% if (message) { %>
-            <div class="alert alert-danger" role="alert">
-                <button type="button" class="close" onclick="this.parentElement.style.display='none';">&times;</button>
-                <%= message %>
-            </div>
-        <% } %>
-        <%- include("sidebar.ejs")%>
-        <div class="main">
-            <%- include("navbar.ejs") %>
-            <div class="tag">
-                <p id="head">Student Registration</p>
-                <button id="export" ><i class="fa-solid fa-file-export"></i> Export</button>
-                <button id="import"><i class="fa-solid fa-file-import"></i> Import</button>
-                <input type="file" id="fileInput" accept=".csv" style="display: none;">
-            </div>
-            <div class="content" id="cont">
-                <h2>Personal Details</h2>
-                <div style="height: 0.8vw;"></div>
-                <div class="details">
-                    <form action="/student" method="post">
-                        <div class="data">
-                            <label for="name">Full Name:</label>
-                            <input type="text" id="name" name="Name" placeholder="Enter Your Full Name" required >
-                            <label for="email" id="mail">Email ID:</label>
-                            <input type="email" id="email" name="email" placeholder="Enter Your Email" required>
-                            <label for="club">Major Club:</label>
-                            <select name="club" required id="club">
-                                <option value="No club">None</option>
-                                <option value="PFA">PFA</option>
-                                <option value="ACM">ACM</option>
-                                <option value="ROBOTICS">ROBOTICS</option>
-                                <option value="STROKES">STROKES</option>
-                                <option value="SIERRA">SIERRA</option>
-                            </select>
-                            <label for="batch">Batch:</label>
-                            <input type="number" name="batch" id="batch" placeholder="Batch Year" maxlength="4" required min="2014">
-                            <!-- <label for="Scec">SCEC Member:</label>
+      <% if (message) { %>
+      <div class="alert alert-danger" role="alert">
+        <button
+          type="button"
+          class="close"
+          onclick="this.parentElement.style.display='none';"
+        >
+          &times;
+        </button>
+        <%= message %>
+      </div>
+      <% } %> <%- include("sidebar.ejs")%>
+      <div class="main">
+        <%- include("navbar.ejs") %>
+        <div class="tag">
+          <p id="head">Student Registration</p>
+          <button id="export">
+            <i class="fa-solid fa-file-export"></i> Export
+          </button>
+          <button id="import">
+            <i class="fa-solid fa-file-import"></i> Import
+          </button>
+          <input
+            type="file"
+            id="fileInput"
+            accept=".csv"
+            style="display: none"
+          />
+        </div>
+        <div class="content" id="cont">
+          <h2>Personal Details</h2>
+          <div style="height: 0.8vw"></div>
+          <div class="details">
+            <form action="/student" method="post">
+              <div class="data">
+                <label for="name">Full Name:</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="Name"
+                  placeholder="Enter Your Full Name"
+                  required
+                />
+                <label for="email" id="mail">Email ID:</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Enter Your Email"
+                  required
+                />
+                <label for="club">Major Club:</label>
+                <select name="club" required id="club">
+                  <option value="No club">None</option>
+                  <option value="PFA">PFA</option>
+                  <option value="ACM">ACM</option>
+                  <option value="ROBOTICS">ROBOTICS</option>
+                  <option value="STROKES">STROKES</option>
+                  <option value="SIERRA">SIERRA</option>
+                </select>
+                <label for="batch">Batch:</label>
+                <input
+                  type="number"
+                  name="batch"
+                  id="batch"
+                  placeholder="Batch Year"
+                  maxlength="4"
+                  required
+                  min="2014"
+                />
+                <!-- <label for="Scec">SCEC Member:</label>
                             <select name="Scec" id="Scec">
                                 <option value="Select">Select</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select> -->
-                        </div>
-                        <div class="data">
-                            <label for="phone">Phone Number:</label>
-                            <input type="tel" id="phone" name="Phone_Number" required placeholder="Enter Your Number" >
-                            <!-- <div style="height: 2vw"></div> -->
-                            <!-- <label for="dob">DOB:</label>
+              </div>
+              <div class="data">
+                <label for="phone">Phone Number:</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="Phone_Number"
+                  required
+                  placeholder="Enter Your Number"
+                />
+                <!-- <div style="height: 2vw"></div> -->
+                <!-- <label for="dob">DOB:</label>
                             <input type="date" id="dob" name="dob" required> -->
-                            <!-- <label for="Club_post">Club Post:</label>
+                <!-- <label for="Club_post">Club Post:</label>
                             <select name="Club_post" id="Club_post">
                                 <option value="Select">Select</option>
                                 <option value="Member">Member</option>
@@ -69,75 +112,98 @@
                                 <option value="VicePresident">VicePresident</option>
                                 <option value="President">President</option>
                             </select> -->
-                            <label for="Hostel">Hostel:</label>
-                            <select name="hostel" id="hostel">
-                                <option value="select">Select</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                            </select>
-                            <label for="hname">Hostel Name:</label>
-                            <select name="Hostel" id="hname">
-                                <option value="none">Select</option>
-                                <option value="Bhagat Singh">Bhagat Singh Hostel</option>
-                                <option value="Kalpana Chawala">Kalpana Chawala</option>
-                                <option value="Gargi">Gargi</option>
-                                <option value="Homi Bhabha">Homi Bhabha</option>
-                                <option value="Vikram Sarabai">Vikram Sarabai</option>
-                                <option value="APJ Abdul Kalam">APJ Abdul Kalam</option>
-                            </select>
-                            <label for="Rnumber">Enrollment Number:</label>
-                            <input type="number" name="EnrollmentNumber" id="Enumber" placeholder="Enrollment Number" required min="140000" >
-                            <!-- <label for="Department">Specialization:</label>
+                <label for="Hostel">Hostel:</label>
+                <select name="hostel" id="hostel">
+                  <option value="select">Select</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+                <label for="hname">Hostel Name:</label>
+                <select name="Hostel" id="hname">
+                  <option value="none">Select</option>
+                  <option value="Bhagat Singh">Bhagat Singh Hostel</option>
+                  <option value="Kalpana Chawala">Kalpana Chawala</option>
+                  <option value="Gargi">Gargi</option>
+                  <option value="Homi Bhabha">Homi Bhabha</option>
+                  <option value="Vikram Sarabai">Vikram Sarabai</option>
+                  <option value="APJ Abdul Kalam">APJ Abdul Kalam</option>
+                </select>
+                <label for="Rnumber">Enrollment Number:</label>
+                <input
+                  type="number"
+                  name="EnrollmentNumber"
+                  id="Enumber"
+                  placeholder="Enrollment Number"
+                  required
+                  min="140000"
+                />
+                <!-- <label for="Department">Specialization:</label>
                             <input type="text" id="dept" name="Department" placeholder="Specialization"> -->
-                            <button id="submitbtn">Submit</button>
-                        </div>
-                        <div class="data">
-                            <label for="gender" id="gen">Gender:</label>
-                            <select id="gender" name="gender" required>
-                                <option value="none" >Select</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
-                            </select>
-                            <!-- <div style="height: 2vw;"></div> -->
-                            <label for="Designation">Course:</label>
-                            <select name="course" id="course" required>
-                                <option value="none">None</option>
-                                <option value="Btech">B.Tech</option>
-                                <option value="BBA">BBA</option>
-                                <option value="BCOM">B.com</option>
-                                <option value="LLB">LLB</option>
-                            </select>
-                            <label for="Rnumber">Registration Number:</label>
-                            <input type="text" name="RegistrationNumber" id="Rnumber" placeholder="Registration Number" required min="140000" >
-                            <label for="profilepic">Profile Picture:</label>
-                            <input type="file" id="ppic" accept=".jpg, .jpeg, .png">
-                        </div>
-                    </form>
-                </div>
-            </div>
+                <button id="submitbtn">Submit</button>
+              </div>
+              <div class="data">
+                <label for="gender" id="gen">Gender:</label>
+                <select id="gender" name="gender" required>
+                  <option value="none">Select</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+                <!-- <div style="height: 2vw;"></div> -->
+                <label for="Designation">Course:</label>
+                <select name="course" id="course" required>
+                  <option value="none">None</option>
+                  <option value="Btech">B.Tech</option>
+                  <option value="BBA">BBA</option>
+                  <option value="BCOM">B.com</option>
+                  <option value="LLB">LLB</option>
+                </select>
+                <label for="Rnumber">Registration Number:</label>
+                <input
+                  type="text"
+                  name="RegistrationNumber"
+                  id="Rnumber"
+                  placeholder="Registration Number"
+                  required
+                  min="140000"
+                />
+                <label for="profilepic">Profile Picture:</label>
+                <input type="file" id="ppic" accept=".jpg, .jpeg, .png" />
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-    <script src="https://kit.fontawesome.com/d91f0db9b6.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/d91f0db9b6.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="./script.js"></script>
     <script>
-        document.getElementById('import').addEventListener('click', function() {
-            document.getElementById('fileInput').click();
-        });
+      const exportButton = document.getElementById("export");
+      exportButton.addEventListener("click", () => {
+        window.location.href = "/samplecsv";
+      });
+      document.getElementById("import").addEventListener("click", function () {
+        document.getElementById("fileInput").click();
+      });
 
-        document.getElementById('fileInput').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const csvContent = e.target.result;
-                    // Here you can process the CSV content
-                    console.log(csvContent); // For demonstration, log the CSV content
-                    // You can parse the CSV content and populate the form or send it to the server
-                };
-                reader.readAsText(file);
-            }
+      document
+        .getElementById("fileInput")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const csvContent = e.target.result;
+              // Here you can process the CSV content
+              console.log(csvContent); // For demonstration, log the CSV content
+              // You can parse the CSV content and populate the form or send it to the server
+            };
+            reader.readAsText(file);
+          }
         });
     </script>
-</body>
+  </body>
 </html>
