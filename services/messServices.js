@@ -1,8 +1,8 @@
 import { collection, doc, query, where, getDocs,setDoc } from "firebase/firestore";
 import { auth, db } from "../db.js";
 import admin from "firebase-admin";  
-import { createRequire } from 'module';import dotenv from "dotenv";
-const require = createRequire(import.meta.url);
+import "dotenv/config";
+import dotenv from "dotenv";
 dotenv.config();
 const serviceAccountKey=Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_KEY, 'base64').toString('utf-8');
 const serviceAccount = JSON.parse(serviceAccountKey)
