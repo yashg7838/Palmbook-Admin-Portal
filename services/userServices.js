@@ -15,7 +15,7 @@ const addUser = async (data) => {
     data.uid = uid;
     await setDoc(doc(db, "users", uid), data);
   } catch (err) {
-    console.log("error adding student",err);
+    console.log("error adding student", err);
     return null;
   }
 };

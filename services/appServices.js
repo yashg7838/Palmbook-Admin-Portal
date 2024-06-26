@@ -4,11 +4,14 @@ import {
   getAuth,
   signOut,
 } from "firebase/auth";
-import admin from "firebase-admin";  
+import admin from "firebase-admin";
 import "dotenv/config";
 import dotenv from "dotenv";
 dotenv.config();
-const serviceAccountKey=Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_KEY, 'base64').toString('utf-8');
+const serviceAccountKey = Buffer.from(
+  process.env.FIREBASE_SERVICE_ACCOUNT_KEY,
+  "base64"
+).toString("utf-8");
 
 const serviceAccount = JSON.parse(serviceAccountKey);
 import { collection, query, where, getDocs } from "firebase/firestore";
@@ -49,7 +52,11 @@ const signIn = async (req, res) => {
   try {
     const email = req.body.username;
     const password = req.body.password;
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
     const idToken = await userCredential.user.getIdToken();
 
     const q = query(
@@ -60,7 +67,10 @@ const signIn = async (req, res) => {
     const snapshot = await getDocs(q);
 
     if (!snapshot.empty) {
-      res.cookie('token', idToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+      res.cookie("token", idToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+      });
       res.redirect("/home");
     } else {
       const qMess = query(
@@ -71,7 +81,10 @@ const signIn = async (req, res) => {
       const snapshot2 = await getDocs(qMess);
 
       if (!snapshot2.empty) {
-        res.cookie('token', idToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+        res.cookie("token", idToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+        });
         res.redirect("/mess");
       } else {
         res.redirect("login?message=You Dont have access to this Website");
@@ -121,7 +134,7 @@ const signOutFunc = async (req, res) => {
   const auth = getAuth();
   signOut(auth)
     .then(() => {
-      res.clearCookie('token');
+      res.clearCookie("token");
       res.redirect("/");
     })
     .catch((error) => {

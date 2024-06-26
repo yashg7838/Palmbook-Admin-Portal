@@ -1,11 +1,21 @@
-import { collection, doc, query, where, getDocs,setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  query,
+  where,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
 import { auth, db } from "../db.js";
-import admin from "firebase-admin";  
+import admin from "firebase-admin";
 import "dotenv/config";
 import dotenv from "dotenv";
 dotenv.config();
-const serviceAccountKey=Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_KEY, 'base64').toString('utf-8');
-const serviceAccount = JSON.parse(serviceAccountKey)
+const serviceAccountKey = Buffer.from(
+  process.env.FIREBASE_SERVICE_ACCOUNT_KEY,
+  "base64"
+).toString("utf-8");
+const serviceAccount = JSON.parse(serviceAccountKey);
 
 if (!admin.apps.length) {
   admin.initializeApp({
