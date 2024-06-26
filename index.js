@@ -3,6 +3,7 @@ import express from "express";
 import session from "express-session";
 import fileUpload from "express-fileupload";
 import path from "path";
+import cookieParser from "cookie-parser";
 import viewsRouter from "./routes/viewsRoutes.js";
 import actionRouter from "./routes/actionRoutes.js";
 
@@ -17,6 +18,7 @@ app.set("views", "./views");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(fileUpload());
+app.use(cookieParser())
 
 app.use(
   session({

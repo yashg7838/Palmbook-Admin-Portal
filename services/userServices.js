@@ -15,7 +15,7 @@ const addUser = async (data) => {
     data.uid = uid;
     await setDoc(doc(db, "users", uid), data);
   } catch (err) {
-    console.log(err);
+    console.log("error adding student",err);
     return null;
   }
 };
@@ -25,7 +25,7 @@ const uploadStudentData = async (req, res) => {
   req.body.Campus = "In";
   req.body.CLub_Post = "member";
   req.body["User Type"] = "student";
-  await addUser(db, req.body);
+  await addUser(req.body);
 
   res.redirect("/student?message=Student Added");
 };

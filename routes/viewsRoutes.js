@@ -41,7 +41,9 @@ router.get("/changepswd", checkAuthentication, (req, res) => {
   res.render("changepswd.ejs");
 });
 router.get("/mess", checkAuthenticationMess, (req, res) => {
-  res.render("messuser.ejs");
+  const message = req.query.message || "";
+
+  res.render("messuser.ejs",{message});
 });
 
 export default router;

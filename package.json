@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "csv-parser": "^3.0.0",
     "dotenv": "^16.4.5",
@@ -22,6 +23,7 @@
     "express-session": "^1.18.0",
     "file-upload": "^0.0.0",
     "firebase": "^10.11.1",
+    "firebase-admin": "^12.2.0",
     "json2csv": "^6.0.0-alpha.2"
   }
 }

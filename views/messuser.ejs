@@ -9,6 +9,18 @@
 </head>
 <body>
     <div class="nav">
+        <% if (message) { %>
+            <div class="alert alert-danger" role="alert">
+              <button
+                type="button"
+                class="close"
+                onclick="this.parentElement.style.display='none';"
+              >
+                &times;
+              </button>
+              <%= message %>
+            </div>
+            <% } %> 
         <div class="set">
             <button id="setting"><i class="fa-solid fa-gear"></i></button>
             <div class="box">

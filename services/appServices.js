@@ -4,34 +4,30 @@ import {
   getAuth,
   signOut,
 } from "firebase/auth";
+import admin from "firebase-admin";  
+import { createRequire } from 'module';
+import dotenv from "dotenv";
+const require = createRequire(import.meta.url);
+dotenv.config();
+const serviceAccountKey=Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_KEY, 'base64').toString('utf-8');
+const serviceAccount = JSON.parse(serviceAccountKey);
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "../db.js";
 
-const checkAuthentication = (req, res, next) => {
-  auth;
-  if (auth.currentUser !== null) {
-    const q = query(
-      collection(db, "users"),
-      where("email", "==", auth.currentUser.email),
-      where("user", "==", "admin")
-    );
-    getDocs(q).then((snapshot) => {
-      if (!snapshot.empty) {
-        next();
-      } else {
-        res.redirect("/login");
-      }
-    });
-  } else {
-    res.redirect("/login");
-  }
-};
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
 
-const signIn = async (req, res) => {
+const checkAuthentication = async (req, res, next) => {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.redirect("/login");
+  }
+
   try {
-    const email = req.body.username;
-    const password = req.body.password;
-    await signInWithEmailAndPassword(auth, email, password);
+    const decodedToken = await admin.auth().verifyIdToken(token);
+    const email = decodedToken.email;
+
     const q = query(
       collection(db, "users"),
       where("email", "==", email),
@@ -40,6 +36,31 @@ const signIn = async (req, res) => {
     const snapshot = await getDocs(q);
 
     if (!snapshot.empty) {
+      next();
+    } else {
+      res.redirect("/login");
+    }
+  } catch (error) {
+    console.log("Error during token verification", error);
+    res.redirect("/login");
+  }
+};
+const signIn = async (req, res) => {
+  try {
+    const email = req.body.username;
+    const password = req.body.password;
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const idToken = await userCredential.user.getIdToken();
+
+    const q = query(
+      collection(db, "users"),
+      where("email", "==", email),
+      where("user", "==", "admin")
+    );
+    const snapshot = await getDocs(q);
+
+    if (!snapshot.empty) {
+      res.cookie('token', idToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
       res.redirect("/home");
     } else {
       const qMess = query(
@@ -50,7 +71,8 @@ const signIn = async (req, res) => {
       const snapshot2 = await getDocs(qMess);
 
       if (!snapshot2.empty) {
-        res.redirect("mess");
+        res.cookie('token', idToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+        res.redirect("/mess");
       } else {
         res.redirect("login?message=You Dont have access to this Website");
       }
@@ -99,6 +121,7 @@ const signOutFunc = async (req, res) => {
   const auth = getAuth();
   signOut(auth)
     .then(() => {
+      res.clearCookie('token');
       res.redirect("/");
     })
     .catch((error) => {

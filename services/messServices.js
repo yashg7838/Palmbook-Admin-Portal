@@ -1,22 +1,41 @@
-import { collection, doc, query, where, getDocs } from "firebase/firestore";
+import { collection, doc, query, where, getDocs,setDoc } from "firebase/firestore";
 import { auth, db } from "../db.js";
+import admin from "firebase-admin";  
+import { createRequire } from 'module';import dotenv from "dotenv";
+const require = createRequire(import.meta.url);
+dotenv.config();
+const serviceAccountKey=Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_KEY, 'base64').toString('utf-8');
+const serviceAccount = JSON.parse(serviceAccountKey)
 
-const checkAuthenticationMess = (req, res, next) => {
-  auth;
-  if (auth.currentUser !== null) {
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+}
+const checkAuthenticationMess = async (req, res, next) => {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.redirect("/login");
+  }
+
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(token);
+    const email = decodedToken.email;
+
     const q = query(
       collection(db, "users"),
-      where("email", "==", auth.currentUser.email),
+      where("email", "==", email),
       where("user", "==", "mess")
     );
-    getDocs(q).then((snapshot) => {
-      if (!snapshot.empty) {
-        next();
-      } else {
-        res.redirect("/login");
-      }
-    });
-  } else {
+    const snapshot = await getDocs(q);
+
+    if (!snapshot.empty) {
+      next();
+    } else {
+      res.redirect("/login");
+    }
+  } catch (error) {
+    console.log("Error during token verification", error);
     res.redirect("/login");
   }
 };
