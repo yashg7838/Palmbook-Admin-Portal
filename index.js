@@ -14,7 +14,10 @@ const __dirname = path.resolve();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.set("views", "./views");
-
+app.use((req, res, next) => {
+  console.log(`Incoming request: ${req.method} ${req.url}`);
+  next();
+});
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(fileUpload());
@@ -32,6 +35,7 @@ app.use(
     },
   })
 );
+app.get("/favicon.ico", (req, res) => res.status(204).end());
 app.use("", viewsRouter);
 app.use("", actionRouter);
 

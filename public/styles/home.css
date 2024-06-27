@@ -1,97 +1,105 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
-*{
-    padding: 0%;
-    margin: 0%;
-    outline-width: 0;
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,700,900");
+* {
+  padding: 0%;
+  margin: 0%;
+  outline-width: 0;
 }
-.container{
-    display: grid;
-    width: 99.2vw;
-    grid-template-columns: 1fr 5fr;
+.container {
+  display: grid;
+  width: 99.2vw;
+  grid-template-columns: 1fr 5fr;
 }
 input:focus {
-    outline: none;
+  outline: none;
 }
 
-.main{
-    background-color: white;
-    display: grid;
-    width: 100%;
-    grid-template-rows: 6vw 5vw 39vw;
+.main {
+  background-color: white;
+  display: grid;
+  width: 100%;
+  grid-template-rows: 6vw 5vw 39vw;
 }
-.tag{
-    padding-left: 2vw;
-    padding-top: 0.9vw;
-    font-size: 2vw;
-    font-weight: 100;
-    font-family: 'poppins', sans-serif !important;
-    background-color: white;
-    display: flex;
-    border-left: .12vw solid rgb(206, 206, 206);
-    border-bottom: .12vw solid rgb(206, 206, 206);
+.tag {
+  padding-left: 2vw;
+  padding-top: 0.9vw;
+  font-size: 2vw;
+  font-weight: 100;
+  font-family: "poppins", sans-serif !important;
+  background-color: white;
+  display: flex;
+  border-left: 0.12vw solid rgb(206, 206, 206);
+  border-bottom: 0.12vw solid rgb(206, 206, 206);
 }
-.nav{
-    background-color: white;
-    border-left: .12vw solid rgb(206, 206, 206);
-    border-bottom: .12vw solid rgb(206, 206, 206);
+.nav {
+  background-color: white;
+  border-left: 0.12vw solid rgb(206, 206, 206);
+  border-bottom: 0.12vw solid rgb(206, 206, 206);
 }
-#cont{
-    display: block;
+#cont {
+  display: block;
 }
-.content{
-    border-left: .12vw solid rgb(206, 206, 206);
-    font-size: 1vw;
-    font-weight: 100;
-    height: 39vw;
-    background-color:white;
-    font-family: 'poppins', sans-serif !important;
+.content {
+  border-left: 0.12vw solid rgb(206, 206, 206);
+  font-size: 1vw;
+  font-weight: 100;
+  height: 39vw;
+  background-color: white;
+  font-family: "poppins", sans-serif !important;
 }
-.content h2{
-    /* padding-top: 2vw; */
-    /* padding-left: 2vw; */
+.content h2 {
+  /* padding-top: 2vw; */
+  /* padding-left: 2vw; */
 }
-.details{
-    display: flex;
-    margin: 0%;
-    padding: 0%;
+.details {
+  display: flex;
+  margin: 0%;
+  padding: 0%;
 }
 .data {
-    height: 23vw;
-    width: 23vw;
-    background-color: aquamarine;
-    display: flex;
-    margin-top: 4vw;
-    flex-direction: column;
-    margin-left: 4vw;
-    font-family: 'poppins', sans-serif !important;
-    font-size: 2vw;
+  height: 23vw;
+  width: 23vw;
+  /* background-color: aquamarine; */
+  display: flex;
+  margin-top: 4vw;
+  flex-direction: column;
+  margin-left: 4vw;
+  font-family: "poppins", sans-serif !important;
+  font-size: 2vw;
 }
-#createStudent-btn{
-    color: black;
-    background-color: white;
+#createStudent-btn {
+  color: black;
+  background-color: white;
 }
-#home{
-    color: white;
-    background-color: rgba(97, 67, 230, 0.767);
+#home {
+  color: white;
+  background-color: rgba(97, 67, 230, 0.767);
 }
-.alert{
-    background-color: rgba(97, 67, 230);
-    text-align: center;
-    padding-top: 0.4vw;
-    font-size: 2vw;
-    width: 100%;
-    height: 3vw;
-    z-index: 1;
-    color: white;
-    position: fixed;
+.alert {
+  background-color: rgba(97, 67, 230);
+  text-align: center;
+  padding-top: 0.4vw;
+  font-size: 2vw;
+  width: 100%;
+  height: 3vw;
+  z-index: 1;
+  color: white;
+  position: fixed;
 }
 .close {
-    position: absolute;
-    top: 0.5rem;
-    right: 1rem;
-    color: inherit;
-    background: none;
-    border: none;
-    font-size: 3rem;
-    cursor: pointer;
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  color: inherit;
+  background: none;
+  border: none;
+  font-size: 3rem;
+  cursor: pointer;
+}
+.data {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+#chartDiv1{
+    width: 100%;
+  height: 500px;
 }

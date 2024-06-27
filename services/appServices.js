@@ -65,7 +65,6 @@ const signIn = async (req, res) => {
       where("user", "==", "admin")
     );
     const snapshot = await getDocs(q);
-
     if (!snapshot.empty) {
       res.cookie("token", idToken, {
         httpOnly: true,
@@ -93,6 +92,57 @@ const signIn = async (req, res) => {
   } catch (err) {
     console.log("Error during sign-in", err);
     res.redirect("login?message=Incorrect email or password");
+  }
+};
+
+const StudentCampusStatus = async () => {
+  try {
+    const q = query(collection(db, "users"), where("Campus", "==", "Out"));
+    const snapshot = await getDocs(q);
+    const q2 = query(collection(db, "users"), where("Campus", "==", "In"));
+    const snapshot2 = await getDocs(q2);
+    return [
+      { category: "Students Inside Campus", value: snapshot2.size },
+      { category: "Students Outside Campus", value: snapshot.size },
+    ];
+  } catch (err) {
+    console.log(err);
+    return [
+      { category: "Students Inside Campus", value: 0 },
+      { category: "Students Outside Campus", value: 0 },
+    ];
+  }
+};
+
+const GatepassStatus = async () => {
+  try {
+    const q = query(
+      collection(db, "Gatepass"),
+      where("status", "==", "Approved")
+    );
+    const snapshotApproved = await getDocs(q);
+    const q2 = query(
+      collection(db, "Gatepass"),
+      where("status", "==", "Submitted")
+    );
+    const snapshotSubmitted = await getDocs(q2);
+    const q3 = query(
+      collection(db, "Gatepass"),
+      where("status", "==", "Out Of Campus")
+    );
+    const snapshotRejected = await getDocs(q2);
+    return [
+      { category: "Gatespass Applied", value: snapshotSubmitted.size },
+      { category: "Gatespass Approved", value: snapshotApproved.size },
+      { category: "Students Out Of Campus With GatePass", value: snapshotRejected.size },
+    ];
+  } catch (err) {
+    console.log(err);
+    return [
+      { category: "Gatespass Applied", value: 0 },
+      { category: "Gatespass Approved", value: 0 },
+      { category: "Gatespass Rejected", value: 0 },
+    ];
   }
 };
 
@@ -147,4 +197,6 @@ export {
   forgotPassword,
   changePassword,
   signOutFunc,
+  StudentCampusStatus,
+  GatepassStatus,
 };

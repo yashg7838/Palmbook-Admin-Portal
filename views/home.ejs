@@ -1,71 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PalmBook</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-    <link rel="stylesheet" href="./styles/home.css">
-    <link rel="stylesheet" href="./styles/sidebar.css">
-    <link rel="stylesheet" href="./styles/navbar.css">
-</head>
-<body>
-    <div class="container">
-        <% if (message) { %>
-            <div class="alert alert-danger" role="alert">
-                <button type="button" class="close" onclick="this.parentElement.style.display='none';">&times;</button>
-                <%= message %>
-            </div>
-        <% } %>
-        <%- include("sidebar.ejs")%>
-        <div class="main">
-            <%- include("navbar.ejs") %>
-            <div class="tag">
-                <p id="head">Home</p>
-                <!-- <button id="export" ><i class="fa-solid fa-file-export"></i> Export</button> -->
-                <!-- <button id="import"><i class="fa-solid fa-file-import"></i> Import</button> -->
-                <!-- <input type="file" id="fileInput" accept=".csv" style="display: none;"> -->
-            </div>
-            <div class="content" id="cont">
-                <!-- <h2>Personal Details</h2> -->
-                <div style="height: 0.8vw;"></div>
-                <div class="details">
-                    <!-- <form action="/student" method="post"> -->
-                        <div class="data">
-                            
-                        </div>
-                        <div class="data">
-                            
-                        </div>
-                        <div class="data">
-                            
-                        </div>
-                    <!-- </form> -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://kit.fontawesome.com/d91f0db9b6.js" crossorigin="anonymous"></script>
-    <script src="./script.js"></script>
-    <!-- <script>
-        document.getElementById('import').addEventListener('click', function() {
-            document.getElementById('fileInput').click();
-        });
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="./styles/home.css" />
+    <link rel="stylesheet" href="./styles/sidebar.css" />
+    <link rel="stylesheet" href="./styles/navbar.css" />
+  </head>
 
-        document.getElementById('fileInput').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const csvContent = e.target.result;
-                    // Here you can process the CSV content
-                    console.log(csvContent); // For demonstration, log the CSV content
-                    // You can parse the CSV content and populate the form or send it to the server
-                };
-                reader.readAsText(file);
-            }
+  <body>
+    <div class="container">
+      <% if (message) { %>
+      <div class="alert alert-danger" role="alert">
+        <button
+          type="button"
+          class="close"
+          onclick="this.parentElement.style.display='none';"
+        >
+          &times;
+        </button>
+        <%= message %>
+      </div>
+      <% } %> <%- include("sidebar.ejs") %>
+      <div class="main">
+        <%- include("navbar.ejs") %>
+        <div class="tag">
+          <p id="head">Home</p>
+        </div>
+        <div class="content" id="cont">
+          <div style="height: 0.8vw"></div>
+          <div class="details">
+            <div
+              class="data"
+              id="chartdiv1"
+              style="width: 100%; height: 400px"
+            ></div>
+            <div
+              class="data"
+              id="chartdiv2"
+              style="width: 100%; height: 400px"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://kit.fontawesome.com/d91f0db9b6.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./script.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <script>
+      am5.ready(function() {
+        // Themes begin
+        var root1 = am5.Root.new("chartdiv1");
+        var root2 = am5.Root.new("chartdiv2");
+
+        root1.setThemes([am5themes_Animated.new(root1)]);
+        root2.setThemes([am5themes_Animated.new(root2)]);
+        // Themes end
+
+        // Chart 1
+        var chart1 = root1.container.children.push(am5percent.PieChart.new(root1, {
+          layout: root1.verticalLayout,
+          radius: am5.percent(95),
+          innerRadius: am5.percent(50)
+        }));
+
+        var series1 = chart1.series.push(am5percent.PieSeries.new(root1, {
+          valueField: "value",
+          categoryField: "category"
+        }));
+
+        series1.labels.template.setAll({
+          forceHidden: true
         });
-    </script> -->
-</body>
+        series1.ticks.template.setAll({
+          forceHidden: true
+        });
+        series1.slices.template.setAll({
+          tooltipText: "{category}: {value}"
+        });
+        series1.data.setAll(<%- JSON.stringify(chartData1) %>);
+        var label1 = chart1.seriesContainer.children.push(am5.Label.new(root1, {
+          text: "Students Data",
+          fontSize: 20,
+          fontWeight: "bold",
+          centerX: am5.percent(50),
+          centerY: am5.percent(50),
+          textAlign: "center"
+        }));
+        // Chart 2
+        var chart2 = root2.container.children.push(am5percent.PieChart.new(root2, {
+          layout: root2.verticalLayout,
+          radius: am5.percent(95),
+          innerRadius: am5.percent(50)
+        }));
+
+        var series2 = chart2.series.push(am5percent.PieSeries.new(root2, {
+          valueField: "value",
+          categoryField: "category"
+        }));
+
+        series2.labels.template.setAll({
+          forceHidden: true
+        });
+        series2.ticks.template.setAll({
+          forceHidden: true
+        });
+        series2.slices.template.setAll({
+          tooltipText: "{category}: {value}"
+        });
+        series2.data.setAll(<%- JSON.stringify(chartData2) %>);
+        var label2 = chart2.seriesContainer.children.push(am5.Label.new(root2, {
+          text: "Gatepass Data",
+          fontSize: 20,
+          fontWeight: "bold",
+          centerX: am5.percent(50),
+          centerY: am5.percent(50),
+          textAlign: "center"
+        }));
+      });
+    </script>
+  </body>
 </html>
