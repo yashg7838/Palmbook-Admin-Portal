@@ -17,9 +17,10 @@ router.get("/login", (req, res) => {
 
 router.get("/home", checkAuthentication, async (req, res) => {
   const message = req.query.message || "";
-
   const chartData1 = await StudentCampusStatus();
   const chartData2 = await GatepassStatus();
+
+  console.log(chartData1, chartData2);
   res.render("home.ejs", { message, chartData1, chartData2 });
 });
 router.get("/services", checkAuthentication, (req, res) => {

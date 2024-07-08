@@ -1,53 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PalmBook</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <!-- <link rel="stylesheet" href="./styles/other.css"> -->
-    <link rel="stylesheet" href="./styles/sidebar.css">
-    <link rel="stylesheet" href="./styles/navbar.css">
-    <link rel="stylesheet" href="./styles/register.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./styles/sidebar.css" />
+    <link rel="stylesheet" href="./styles/navbar.css" />
+    <link rel="stylesheet" href="./styles/register.css" />
+  </head>
+  <body>
     <div class="container" id="contain">
-
-            <% if (message) { %>
-                <div class="alert alert-danger" role="alert">
-                    <button type="button" class="close" onclick="this.parentElement.style.display='none';">&times;</button>
-                    <%= message %>
-                </div>
-            <% } %>
-        
-        <%- include("sidebar.ejs")%>
-        <div class="main" id="main">
-            <%- include("navbar.ejs") %>
-            <div class="tag" id="tag">
-                <p id="head">Admin Registration</p>
-            </div>
-            <div class="content" id="cont">
-                <h2>Credentials</h2>
-                <div style="height: 0.8vw;"></div>
-                <div class="details">
-                    <form action="/register" method="post" id="form2">
-                        <div class="data">
-                            <label for="name">Username:</label>
-                            <input type="text" id="name" name="name" placeholder="Enter username" >
-                            <label for="email" id="mail">Email ID:</label>
-                            <input type="email" id="username" name="email" pattern="^[a-zA-Z0-9._%+-]+@bmu\.edu\.in$" placeholder="Enter Email Id" title="Email must end with @bmu.edu.in">
-                            <label for="password">Password:</label>
-                            <input type="password" name="password" id="password" placeholder="Password">
-                        </div>
-                        <div class="data">
-                            <button id="submitbtn" type="submit">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+      <% if (message) { %>
+      <div class="alert alert-danger" role="alert">
+        <button
+          type="button"
+          class="close"
+          onclick="this.parentElement.style.display='none';"
+        >
+          &times;
+        </button>
+        <%= message %>
+      </div>
+      <% } %> <%- include("sidebar.ejs")%>
+      <div class="main" id="main">
+        <%- include("navbar.ejs") %>
+        <div class="tag" id="tag">
+          <p id="head">Admin Registration</p>
         </div>
+        <div class="content" id="cont">
+          <h2>Credentials</h2>
+          <div style="height: 0.8vw"></div>
+          <div class="details">
+            <form action="/register" method="post" id="form2">
+              <div class="data">
+                <label for="name">Username:</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Enter username"
+                />
+                <label for="email" id="mail">Email ID:</label>
+                <input
+                  type="email"
+                  id="username"
+                  name="email"
+                  pattern="^[a-zA-Z0-9._%+-]+@bmu\.edu\.in$"
+                  placeholder="Enter Email Id"
+                  title="Email must end with @bmu.edu.in"
+                />
+                <label for="password">Password:</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                />
+              </div>
+              <div class="data">
+                <button id="submitbtn" type="submit">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-    <script src="https://kit.fontawesome.com/d91f0db9b6.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/d91f0db9b6.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>

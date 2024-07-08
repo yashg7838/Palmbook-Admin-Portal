@@ -1,39 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Palmbook</title>
-    <link rel="stylesheet" href="./styles/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
+  <body>
     <div class="container">
-        <% if (message) { %>
-            <div class="alert alert-danger" role="alert">
-                <button type="button" class="close" onclick="this.parentElement.style.display='none';">&times;</button>
-                <%= message %>
-            </div>
-        <% } %>
-        <div class="box">
-            <div class="left">
-                <h1>Admin Login</h1>
-                <h3>Enter your account details</h3>
-                <br><br>
-                <form action="/login" id="form" method="post">
-                    <input type="text" id="username" name="username" placeholder="Enter your e-mail address" required><br><br>
-                    <input type="password" id="pass" name ="password" placeholder="Password"required><br><br><br>
-                    <a href="/forgotpassword" type="button" id="forgot">Forgot Password?</a><br><br>
-                    <button id="login" type="submit">Login</button>
-                </form><br><br><br>
-                <!-- <p>Don't have an account?? <a href="" id="signup" >Sign Up Here!</a></p> -->
-            </div>
-            <div class="Right">
-                <img src="./Design.png" alt="" id="image">
-                <div class="tagline">
-                    <h1>Welcome to <br> PALMBOOK</h1>
-                </div>
-            </div>
+      <% if (message) { %>
+      <div class="alert alert-danger" role="alert">
+        <button
+          type="button"
+          class="close"
+          onclick="this.parentElement.style.display='none';"
+        >
+          &times;
+        </button>
+        <%= message %>
+      </div>
+      <% } %>
+      <div class="box">
+        <div class="left">
+          <h1>Admin Login</h1>
+          <h3>Enter your account details</h3>
+          <br /><br />
+          <form action="/login" id="form" method="post">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Enter your e-mail address"
+              required
+            /><br /><br />
+            <input
+              type="password"
+              id="pass"
+              name="password"
+              placeholder="Password"
+              required
+            /><br /><br /><br />
+            <a href="/forgotpassword" type="button" id="forgot"
+              >Forgot Password?</a
+            ><br /><br />
+            <button id="login" type="submit">Login</button>
+          </form>
+          <br /><br /><br />
+          <!-- <p>Don't have an account?? <a href="" id="signup" >Sign Up Here!</a></p> -->
         </div>
+        <div class="Right">
+          <img src="./Design.png" alt="" id="image" />
+          <div class="tagline">
+            <h1>
+              Welcome to <br />
+              PALMBOOK
+            </h1>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

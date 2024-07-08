@@ -1,23 +1,55 @@
 <div class="container">
-    <div class="side">
-        <img src="./PalmBook_logo.png" alt="logo" id="logo">
-        <!-- <h2>PalmBook</h2> -->
-        <ul>
-            <li><form action="/home" method="get"><button type="submit" id="home" >Dashboard</button></form></li>
-            <li><form action="/student" method="get"><button type="submit" id="createStudent-btn">Create Student</button></form></li>
-            <!-- <li><form action="/faculty" method="get"><button type="submit" id="faculty">Create Faculty</button></form></li> -->
-            <li><form action="/services" method="get"><button id="services" >Services</button></form>
-                <ul id="secondary">
-                    <li><form action="/services" method="get"><button id="menu" style="text-align: left; margin-left: 3vw"> <i id="bullet" class="fa-solid fa-circle"></i> Mess Menu</button></form></li>
-                    <li><form action="/shuttle" method="get"><button type="submit" id="shuttle" style="text-align: left; margin-left: 3vw" ><i id="bullet" class="fa-solid fa-circle"></i> Shuttle</button></form></li>
-                </ul>
-            </li>
-            <li><form action="/other" method="get"><button id="other">Others</button></form></li>
-            <!-- <li><form action="/register" method="get"><button id="register-new">New Admin</button></form></li> -->
+  <div class="side">
+    <img src="./PalmBook_logo.png" alt="logo" id="logo" />
+    <!-- <h2>PalmBook</h2> -->
+    <ul>
+      <li>
+        <form action="/home" method="get">
+          <button type="submit" id="home">Dashboard</button>
+        </form>
+      </li>
+      <li>
+        <form action="/student" method="get">
+          <button type="submit" id="createStudent-btn">Create Student</button>
+        </form>
+      </li>
+      <!-- <li><form action="/faculty" method="get"><button type="submit" id="faculty">Create Faculty</button></form></li> -->
+      <li>
+        <form action="/services" method="get">
+          <button id="services">Services</button>
+        </form>
+        <ul id="secondary">
+          <li>
+            <form action="/services" method="get">
+              <button id="menu" style="text-align: left; margin-left: 3vw">
+                <i id="bullet" class="fa-solid fa-circle"></i> Mess Menu
+              </button>
+            </form>
+          </li>
+          <li>
+            <form action="/shuttle" method="get">
+              <button
+                type="submit"
+                id="shuttle"
+                style="text-align: left; margin-left: 3vw"
+              >
+                <i id="bullet" class="fa-solid fa-circle"></i> Shuttle
+              </button>
+            </form>
+          </li>
         </ul>
-    </div>
-    <script>
-        document.getElementById("logo").onclick = function() {
-            window.location.href = "/home"; // Replace with the URL of your next page
-        };
-    </script>
+      </li>
+      <li>
+        <form action="/other" method="get">
+          <button id="other">Others</button>
+        </form>
+      </li>
+      <!-- <li><form action="/register" method="get"><button id="register-new">New Admin</button></form></li> -->
+    </ul>
+  </div>
+  <script>
+    document.getElementById("logo").onclick = function () {
+      window.location.href = "/home"; // Replace with the URL of your next page
+    };
+  </script>
+</div>

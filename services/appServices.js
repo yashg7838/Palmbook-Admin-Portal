@@ -134,7 +134,10 @@ const GatepassStatus = async () => {
     return [
       { category: "Gatespass Applied", value: snapshotSubmitted.size },
       { category: "Gatespass Approved", value: snapshotApproved.size },
-      { category: "Students Out Of Campus With GatePass", value: snapshotRejected.size },
+      {
+        category: "Students Out Of Campus With GatePass",
+        value: snapshotRejected.size,
+      },
     ];
   } catch (err) {
     console.log(err);
